@@ -1,0 +1,19 @@
+.element, .count{
+    background: lightyellow;
+    border: 6px solid #FFF;
+    margin: 20px 0;
+}
+.top{
+    background: #663366;
+    margin: 0;
+}
+.top a{
+    color: #FFF;
+    text-decoration: none;
+    padding: 20px;
+    display: block;
+}
+.blog_text, .count{
+    padding: 20px;
+    box-sizing: border-box;
+}

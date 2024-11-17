@@ -1,0 +1,31 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block content %}
+<script src="{% static 'js/photo.js' %}"></script>
+
+
+<!--
+Swaying photo gallery - scroll event
+Created on AUGUST 29, 2023
+Copyright (c) 2023 by Wakana Y.K. (https://codepen.io/wakana-k/pen/WNLrWMm)
+-->
+<!--
+Related works :
+Portforio design @wakana-k - https://codepen.io/wakana-k/pen/BaxKKvE
+Swaying photo gallery - hover event @wakana-k - https://codepen.io/wakana-k/pen/oNJxbPw
+-->
+<body class="bodygall">
+<main class="galp">
+	<div id="gallery">
+		{% for img in g_imagine %}
+			<figure>
+				<img src="{{ img.image.url }}" alt="{{ img.description }}" title="{{ img.title }}">
+				<figcaption>{{ img.title }}</figcaption>
+			</figure>
+		{% endfor %}
+	</div>
+</main>
+
+<footer id='info'>Codepen by <a target="_blank" href="https://codepen.io/wakana-k/">Wakana Y.K.</a></footer>
+</body>
+{% endblock %}

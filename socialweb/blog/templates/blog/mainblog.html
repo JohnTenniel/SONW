@@ -1,0 +1,16 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block content %}
+<h1>Блог</h1>
+<h2 class="count">Постов: </h2>
+{% for bg in blog %}
+    <div class="element">
+        <h2 class="top"><a href="">{{ bg.title }}</a></h2>
+        <div class="blog_text">
+            <h5>{{ bg.time_update }}</h5>
+            <p>{{ bg.content }}</p>
+        </div>
+    </div>
+{% endfor %}
+
+{% endblock %}

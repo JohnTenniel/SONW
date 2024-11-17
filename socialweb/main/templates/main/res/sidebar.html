@@ -1,0 +1,78 @@
+{% load static %}
+<aside class="container">
+
+        <div class="sidebar" style="background-image: url({% static 'images/sidebar.jpg' %});">
+            <div class="profile">
+
+            </div>
+
+            <ul>
+                <li>
+                    <a href="{% url 'main' %}" class="active">
+                        <span class="icon"><i class="fa fa-home"></i></span>
+                        <span class="item">Главная</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'photo' %}">
+                        <span class="icon"><i class="fas fa-desktop"></i></span>
+                        <span class="item">Фото</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'video' %}">
+                        <span class="icon"><i class="fas fa-user-friends"></i></span>
+                        <span class="item">Видео</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'blog' %}">
+                        <span class="icon"><i class="fas fa-tachometer-alt"></i></span>
+                        <span class="item">Блог</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="icon"><i class="fas fa-database"></i></span>
+                        <span class="item">Мэссенджер</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="icon"><i class="fas fa-chart-line"></i></span>
+                        <span class="item">Отчеты</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="icon"><i class="fas fa-user-shield"></i></span>
+                        <span class="item">Админ</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="icon"><i class="fas fa-cog"></i></span>
+                        <span class="item">Настройки</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <div class="top_navbar">
+                <div class="hamburger">
+                    <a href="#">
+                        <i class="fas fa-bars"></i>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+    </aside>
+    <script>
+        var hamburger = document.querySelector(".hamburger");
+        hamburger.addEventListener("click", () => {
+            document.querySelector("body").classList.toggle("active");
+        })
+    </script>

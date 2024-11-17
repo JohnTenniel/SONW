@@ -1,0 +1,39 @@
+from django.shortcuts import render, redirect
+from django.views import View
+from .forms import UserCreationForm, Galleryform
+from django.contrib.auth import login, authenticate
+
+
+def main(request):
+    return render(request, "main/main.html")
+
+
+class Register(View):
+    template_name = 'registration/register.html'
+
+    def get(self, request):
+        context = {
+            'form': UserCreationForm
+        }
+        return render(request, self.template_name, context)
+
+    def post(self, request):
+        form = UserCreationForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=password)
+            login(request, user)
+            return redirect('main')
+        context = {
+            'form': form
+        }
+        return render(request, self.template_name, context)
+
+
+def Add_gallery(request):
+    form = Galleryform
+    context = {'form': form}
+    return redirect(request, 'photo/add_gallery', context)
