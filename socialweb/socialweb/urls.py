@@ -8,6 +8,7 @@ urlpatterns = [
     path('', include('main.urls')),
     path('gallery/', include('gallery.urls')),
     path('blog/', include('blog.urls')),
+    path('profiles/', include('users.urls')),
 ]
 
 if settings.DEBUG:

@@ -8,7 +8,7 @@
             <header class="tm-block-brand">
                 <div class="tm-bg-primary-dark tm-text-white tm-block-brand-inner">
                     <i class="fas fa-braille fa-3x"></i>
-                    <h1 class="tm-brand-name">Имя пользователя(БД/логин)</h1>
+                    <h1 class="tm-brand-name">{{ user  }}</h1>
                 </div>
             </header>
         </div>
@@ -54,27 +54,18 @@
         <div class="item tm-bg-white tm-block tm-form-section" data-desktop-seq-no="9" data-mobile-seq-no="7">
             <div class="tm-form-container tm-block-pad tm-pb-0">
                 <header>
-                    {% if user.is_authenticated %}
+
                     <h2 class="tm-text-uppercase tm-text-gray-light tm-mb">
                         Список друзей
                     </h2>
-                    {{ user.friends.all }}
+
                     <h2 class="tm-text-uppercase tm-text-gray-light tm-mb">
                         Подписчики
                     </h2>
-                    {% for r in fr %}
-                    <a href="{% url 'users.accept' user.id %}">Добавить: {{ user }}</a>
-                    {% endfor %}
+
                     <h2 class="tm-text-uppercase tm-text-gray-light tm-mb">
                         Рекомендации
                     </h2>
-                    {% for user in allusers %}
-                    <a href="{% url 'users/add-friends' user.id %}">Пригласить: {{ User }}</a>
-                    {% endfor %}
-                    {% else %}
-                    <a href="{% url 'login' %}"></a>
-                    <a href="{% url 'register' %}"></a>
-                    {% endif %}
 
                 </header>
 
@@ -84,6 +75,7 @@
                 <div class="tm-bg-secondary tm-text-white tm-block-pad tm-form-section-tag-inner">
                     <header>
                         <h2>Добавь друзей</h2>
+                        <a style="color = red" href="{% url 'login' %}"></a>
                     </header>
                     <p>Просто начни общение</p>
                 </div>
