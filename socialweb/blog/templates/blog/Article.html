@@ -1,0 +1,17 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block content %}
+<head>
+<link rel="stylesheet" href="{% static 'css/articleblog.css' %}" />
+</head>
+
+
+<body class="bodyblog">
+  <article class="art_blog">
+    <h1 class="main_title">{{ blog.title }}</h1>
+    <p class="author"> by {{ blog.autor }}<br/>Published on: {{ blog.time_update }}</p>
+    <img src="{{ blog.photo.url }}" alt="здесь было изображение">
+    <p class="intro">{{ blog.content }}</p>
+  </article>
+</body>
+{% endblock %}

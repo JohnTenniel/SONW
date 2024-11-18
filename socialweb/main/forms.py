@@ -1,9 +1,8 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
+from django.contrib.auth.forms import UserCreationForm
 from django.utils.translation import gettext_lazy as _
 
-from socialweb.gallery.models import Gallery, V_Gallery
 
 User = get_user_model()
 
@@ -20,7 +19,3 @@ class UserCreationForm(UserCreationForm):
         fields = ("username", "email")
 
 
-class Galleryform(forms.ModelForm):
-    class Meta:
-        model = Gallery
-        fields = ['title', 'description', 'image', 'autor', 'tags']

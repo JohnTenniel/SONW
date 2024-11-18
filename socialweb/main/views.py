@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views import View
-from .forms import UserCreationForm, Galleryform
+from .forms import UserCreationForm
 from django.contrib.auth import login, authenticate
 
 
@@ -33,7 +33,3 @@ class Register(View):
         return render(request, self.template_name, context)
 
 
-def Add_gallery(request):
-    form = Galleryform
-    context = {'form': form}
-    return redirect(request, 'photo/add_gallery', context)

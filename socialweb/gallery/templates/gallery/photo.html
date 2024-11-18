@@ -17,6 +17,8 @@ Swaying photo gallery - hover event @wakana-k - https://codepen.io/wakana-k/pen/
 <body class="bodygall">
 <main class="galp">
 	<div id="gallery">
+		<h1>Create post</h1>
+		<a href="{% url 'addimage'%}">Create</a>
 		{% for img in g_imagine %}
 			<figure>
 				<img src="{{ img.image.url }}" alt="{{ img.description }}" title="{{ img.title }}">
