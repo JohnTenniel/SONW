@@ -1,21 +1,14 @@
 {% extends 'main/base.html' %}
 {% load static %}
 
-{% block content %}<link rel="stylesheet" href="{% static 'css/blog.css' %}" />
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/blog.css' %}" />
 <h1>Блог</h1>
 <h1>Create post</h1>
 <a href="{% url 'addpost'%}">Create</a>
 <h2 class="count">Постов: </h2>
 
-{% for post in object_list %}
-<!--    <div class="element">-->
-<!--        <h2 class="top"><a href="{% url 'Article' post.pk %}">{{ post.title }}</a></h2>-->
-<!--        <div class="blog_text">-->
-<!--            <h5>{{ post.time_update }}</h5>-->
-<!--            <p>{{ post.content }}</p>-->
-<!--        </div>-->
-<!--    </div>-->
-
+{% for post in blogpost %}
 <svg display="none" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <defs>
 <symbol id="icon-bubble" viewBox="0 0 1024 1024">
@@ -60,7 +53,6 @@
   </div>
 
 </div>
-
 
 {% endfor %}
 <script type="text/javascript" src="//use.typekit.net/wtt0gtr.js"></script>

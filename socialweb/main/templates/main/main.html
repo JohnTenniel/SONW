@@ -54,32 +54,38 @@
         <div class="item tm-bg-white tm-block tm-form-section" data-desktop-seq-no="9" data-mobile-seq-no="7">
             <div class="tm-form-container tm-block-pad tm-pb-0">
                 <header>
+                    {% if user.is_authenticated %}
                     <h2 class="tm-text-uppercase tm-text-gray-light tm-mb">
-                        Contact Us
+                        Список друзей
                     </h2>
+                    {{ user.friends.all }}
+                    <h2 class="tm-text-uppercase tm-text-gray-light tm-mb">
+                        Подписчики
+                    </h2>
+                    {% for r in fr %}
+                    <a href="{% url 'users.accept' user.id %}">Добавить: {{ user }}</a>
+                    {% endfor %}
+                    <h2 class="tm-text-uppercase tm-text-gray-light tm-mb">
+                        Рекомендации
+                    </h2>
+                    {% for user in allusers %}
+                    <a href="{% url 'users/add-friends' user.id %}">Пригласить: {{ User }}</a>
+                    {% endfor %}
+                    {% else %}
+                    <a href="{% url 'login' %}"></a>
+                    <a href="{% url 'register' %}"></a>
+                    {% endif %}
+
                 </header>
-                <form action="index.html" class="tm-contact-form" method="POST">
-                    <div class="tm-form-group">
-                        <input type="text" id="contact_name" name="contact_name" class="form-control" placeholder="Name" required/>
-                    </div>
-                    <div class="tm-form-group">
-                        <input type="email" id="contact_email" name="contact_email" class="form-control" placeholder="Email" required/>
-                    </div>
-                    <div class="tm-form-group">
-                        <textarea rows="5" id="contact_message" name="contact_message" class="form-control" placeholder="Message" required></textarea>
-                    </div>
-                    <div class="tm-text-right">
-                        <button type="submit" class="tm-btn tm-btn-secondary tm-btn-pad-big">Send</button>
-                    </div>
-                </form>
+
             </div>
 
             <div class="tm-form-section-tag">
                 <div class="tm-bg-secondary tm-text-white tm-block-pad tm-form-section-tag-inner">
                     <header>
-                        <h2>Заголовок</h2>
+                        <h2>Добавь друзей</h2>
                     </header>
-                    <p>Просто очередной текст</p>
+                    <p>Просто начни общение</p>
                 </div>
             </div>
         <div class="item">

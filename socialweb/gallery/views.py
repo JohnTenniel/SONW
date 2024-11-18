@@ -32,3 +32,18 @@ class AddImage(CreateView):
         obj.save()
         return super().form_valid(form)
 
+
+class AddVideo(CreateView):
+    form_class = VideoForm
+    template_name = 'gallery/addvideo.html'
+    success_url = reverse_lazy('video')
+
+    def dispatch(self, request, *args, **kwargs):
+        self.request = request
+        return super().dispatch(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        obj = form.save(commit=False)
+        obj.autor = self.request.user
+        obj.save()
+        return super().form_valid(form)

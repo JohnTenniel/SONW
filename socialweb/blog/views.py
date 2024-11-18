@@ -5,9 +5,16 @@ from django.views.generic import ListView, DetailView, CreateView
 from django.urls import reverse_lazy
 
 
-class blog(ListView):
-    model = Blog
-    template_name = 'blog/mainblog.html'
+# class blog(ListView):
+#     model = Blog
+#     template_name = 'blog/mainblog.html'
+
+def blog(request):
+    bg = Blog.objects.filter(autor_id=request.user.pk)
+    context = {'blogpost': bg}
+    return render(request, "blog/mainblog.html", context)
+
+
 
 
 class Article(DetailView):

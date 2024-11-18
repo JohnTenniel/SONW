@@ -1,20 +1,48 @@
 {% extends 'main/base.html' %}
 {% load static %}
 {% block content %}
+<script src="{% static 'js/video.js' %}"></script>
 
-
-<div class="containgallery">
+<!--<body class="bodygall">-->
+<!--<main class="galp">-->
+<!--	<div id="gallery">-->
+<!--<div class="containgallery">-->
+<!--<h1>Create post</h1>-->
+<!--<a href="{% url 'addvideo'%}">Create</a>-->
+<!--{% for vd in g_video %}-->
+<!--	<article class="video">-->
+<!--		<video class="video_item" src="{{ vd.video.url }}" controls></video>-->
+<!--		<h2>{{ img.title }}</h2>-->
+<!--		<p>{{ img.description }}</p>-->
+<!--	</article>-->
+<!--{% endfor %}-->
+<!--		</div>-->
+<!--</main>-->
+<!--</div>-->
+<!--</body>-->
+<body class="bodygall">
+<main class="galp">
+<h1>Create post</h1>
+<a href="{% url 'addvideo'%}">Create</a>
+<div class="content">
+  <h1 class="section-header">Video Gallery</h1>
+  <div class="section-header-underline"></div>
+  <div class="video-gallery">
 {% for vd in g_video %}
-	<article class="video">
-		<video class="video_item" src="{{ vd.video.url }}" controls></video>
-		<h2>{{ img.title }}</h2>
-		<p>{{ img.description }}</p>
-	</article>
+    <div class="gallery-item">
+      <img src="https://i.pinimg.com/originals/75/f9/97/75f997ee6acf59dc51bbea05eae36677.jpg" alt="North Cascades National Park" />
+      <div class="gallery-item-caption">
+        <div>
+          <h2>{{ vd.title }}</h2>
+          <p>{{ vd.description }}</p>
+        </div>
+        <a class="vimeo-popup" href="{{ vd.video.url }}"></a>
+      </div>
+    </div>
 {% endfor %}
+  </div>
 </div>
-
-
-
-
+	</main>
+</div>
 {% endblock %}
 
