@@ -1,0 +1,14 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block content %}
+<h1>Содержимое Профиля пользователя {{ profile.user }}</h1>
+
+<hr>
+{% for friends in profile.get_friends %}
+    {{ friends }}
+    <br>
+{% endfor %}
+    <h2>Friend number: {{ profile.get_friends_no }}</h2>
+
+
+{% endblock %}
