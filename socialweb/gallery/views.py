@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import Gallery, V_Gallery
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.urls import reverse_lazy
 from .forms import *
 
@@ -47,3 +47,10 @@ class AddVideo(CreateView):
         obj.autor = self.request.user
         obj.save()
         return super().form_valid(form)
+
+
+class UpdateImage(CreateView):
+    model = Gallery
+    template_name = 'gallery/update_image.html'
+    success_url = reverse_lazy('photo')
+

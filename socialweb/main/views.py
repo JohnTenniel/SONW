@@ -4,6 +4,7 @@ from .forms import UserCreationForm
 from django.contrib.auth import login, authenticate
 
 
+
 def main(request):
     return render(request, "main/main.html")
 

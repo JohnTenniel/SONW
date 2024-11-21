@@ -6,12 +6,14 @@
 </head>
 
 
-<body class="bodyblog">
+<div class="profile">
   <article class="art_blog">
     <h1 class="main_title">{{ blog.title }}</h1>
     <p class="author"> by {{ blog.autor }}<br/>Published on: {{ blog.time_update }}</p>
-    <img src="{{ blog.photo.url }}" alt="здесь было изображение">
+    <img src="{{ blog.photo.url }}" alt="здесь было изображение" style="display: block; margin: auto; width: 70%;">
     <p class="intro">{{ blog.content }}</p>
+    <h5><a href="{% url 'updatepost' blog.pk %}">edit</a></h5>
+    <h5><a href="{% url 'deletepost' blog.pk %}">delete</a></h5>
   </article>
-</body>
+</div>
 {% endblock %}

@@ -20,29 +20,133 @@
 <!--</main>-->
 <!--</div>-->
 <!--</body>-->
-<body class="bodygall">
-<main class="galp">
-<h1>Create post</h1>
-<a href="{% url 'addvideo'%}">Create</a>
-<div class="content">
-  <h1 class="section-header">Video Gallery</h1>
-  <div class="section-header-underline"></div>
-  <div class="video-gallery">
-{% for vd in g_video %}
-    <div class="gallery-item">
-      <img src="https://i.pinimg.com/originals/75/f9/97/75f997ee6acf59dc51bbea05eae36677.jpg" alt="North Cascades National Park" />
-      <div class="gallery-item-caption">
-        <div>
-          <h2>{{ vd.title }}</h2>
-          <p>{{ vd.description }}</p>
-        </div>
-        <a class="vimeo-popup" href="{{ vd.video.url }}"></a>
-      </div>
+<!--<body class="bodygall">-->
+<!--<main class="galp">-->
+<!--<h1>Create post</h1>-->
+<!--<a href="{% url 'addvideo'%}">Create</a>-->
+<!--<div class="content">-->
+<!--  <h1 class="section-header">Video Gallery</h1>-->
+<!--  <div class="section-header-underline"></div>-->
+<!--  <div class="video-gallery">-->
+<!--{% for vd in g_video %}-->
+<!--    <div class="gallery-item">-->
+<!--      <img src="https://i.pinimg.com/originals/75/f9/97/75f997ee6acf59dc51bbea05eae36677.jpg" alt="North Cascades National Park" />-->
+<!--      <div class="gallery-item-caption">-->
+<!--        <div>-->
+<!--          <h2>{{ vd.title }}</h2>-->
+<!--          <p>{{ vd.description }}</p>-->
+<!--        </div>-->
+<!--        <a class="vimeo-popup" href="{{ vd.video.url }}"></a>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--{% endfor %}-->
+<!--  </div>-->
+<!--</div>-->
+<!--	</main>-->
+<!--</div>-->
+<div class="main">
+    <div class="search-bar">
+        <input type="text" placeholder="Search"/>
+        <button class="right-side-button" @click="rightSide = !rightSide">
+            <svg
+                    viewBox="0 0 24 24"
+                    width="24"
+                    height="24"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="css-i6dzq1"
+            >
+                <path
+                        d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+                ></path>
+            </svg>
+        </button>
     </div>
-{% endfor %}
-  </div>
-</div>
-	</main>
+    <div class="main-container">
+        <div class="timeline">
+            <div class="timeline-right">
+                {% for vd in g_video %}
+                <div class="album box">
+                    <div class="status-main">
+                        <div class="album-detail">
+                            <div class="album-title">
+                                <strong>{{ user }}</strong> create new video:
+                                <span> {{ vd.title }}</span>
+                            </div>
+                            <div class="album-date">{{ vd.created }}</div>
+                        </div>
+                    </div>
+                    <div class="album-content">
+                        {{ vd.description }}
+                        <div class="album-photos">
+                            <video
+                                    src="{{ vd.video.url }}"
+                                    class="album-photo"
+                                    controls
+                           ></video>
+                        </div>
+                    </div>
+                    <div class="album-actions">
+                        <a href="{% url 'main' %}" class="album-action">
+                            <svg
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    fill="none"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    viewBox="0 0 24 24"
+                            >
+                                <path
+                                        d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5
+.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.
+06a5.5 5.5 0 000-7.78z"
+                                />
+                            </svg>
+                            87
+                        </a>
+                        <a href="#" class="album-action">
+                            <svg
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    fill="none"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    class="css-i6dzq1"
+                                    viewBox="0 0 24 24"
+                            >
+                                <path
+                                        d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"
+                                />
+                            </svg>
+                            20
+                        </a>
+                        <a href="#" class="album-action">
+                            <svg
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    fill="none"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    class="css-i6dzq1"
+                                    viewBox="0 0 24 24"
+                            >
+                                <path d="M17 1l4 4-4 4"/>
+                                <path
+                                        d="M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4"
+                                />
+                                <path d="M21 13v2a4 4 0 01-4 4H3"/>
+                            </svg>
+                            13
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}
 
