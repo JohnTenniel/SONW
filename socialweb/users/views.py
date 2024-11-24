@@ -8,8 +8,11 @@ from django.contrib.auth.models import User
 
 def my_profile(request):
     profile = Profile.objects.get(user=request.user)
-    context = {'profile': profile}
+    ph = Profile.objects.all()
+    context = {'profile': profile, 'profuser': ph}
     return render(request, 'users/profile.html', context)
+
+
 
 
 

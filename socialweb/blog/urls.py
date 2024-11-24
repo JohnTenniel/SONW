@@ -3,9 +3,12 @@ from . import views
 from .views import *
 
 urlpatterns = [
-    # path('', blog.as_view(), name='blog'),
     path('', views.blog, name='blog'),
     path('Article/<int:pk>', Article.as_view(), name='Article'),
+    path('commentsent/<pk>', comment_sent, name='comment-sent'),
+    path('comment/delete/<pk>', delet_comment, name='comment-delete'),
+    path('reply/<pk>', reply_sent, name='reply-sent'),
+    path('reply/delete/<pk>', delet_reply, name='reply_delete'),
     path('addpost/', AddPostView.as_view(), name='addpost'),
     path('Article/edit/<int:pk>', UpdatePostView.as_view(), name='updatepost'),
     path('Article/<int:pk>/remove', DeletePostView.as_view(), name='deletepost'),

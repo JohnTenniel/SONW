@@ -2,18 +2,149 @@
 {% load static %}
 {% block content %}
 <head>
-<link rel="stylesheet" href="{% static 'css/articleblog.css' %}" />
+    <!--    проверить подгонку по размерам окна-->
+    <link rel="stylesheet" href="{% static 'css/articleblog.css' %}"/>
 </head>
 
+<div class="main">
+    <div class="main-container">
+        <div class="timeline">
+            <div class="timeline-right">
+                <div class="profile">
+                    <article class="art_blog">
+                        <h1 class="main_title">{{ blogpost.title }}</h1>
+                        <p class="author"> by {{ blogpost.autor }}<br/>Published on: {{ blogpost.time_update }}</p>
+                        <img src="{{ blogpost.photo.url }}" alt="здесь было изображение"
+                             style="display: block; margin: auto; width: 70%;">
+                        <p class="intro">{{ blogpost.content }}</p>
+                        <h2>Comments...
+                            <a href="#" class="album-action">
+                                <svg
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        fill="none"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="css-i6dzq1"
+                                        viewBox="0 0 24 24"
+                                >
+                                    <path
+                                            d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"
+                                    />
+                                </svg>
+                                {{ blogpost.comments.count }}
+                            </a></h2>
+                        <hr>
+                        <div class="row justify-content-center mt-3 mb-5">
+                            <div class="col-md-5 cil-sm-12">
+                                <form method="POST" action="{% url 'comment-sent' blogpost.id %}">
+                                    {% csrf_token %}
+                                    <div class="form-error">{{ form.non_field_errors }}</div>
+                                    {{ commentform.as_p }}
+                                    <div class="d-grid gap-2">
+                                        <button class="btn btn-success mt-3">Submit!</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
 
-<div class="profile">
-  <article class="art_blog">
-    <h1 class="main_title">{{ blog.title }}</h1>
-    <p class="author"> by {{ blog.autor }}<br/>Published on: {{ blog.time_update }}</p>
-    <img src="{{ blog.photo.url }}" alt="здесь было изображение" style="display: block; margin: auto; width: 70%;">
-    <p class="intro">{{ blog.content }}</p>
-    <h5><a href="{% url 'updatepost' blog.pk %}">edit</a></h5>
-    <h5><a href="{% url 'deletepost' blog.pk %}">delete</a></h5>
-  </article>
+                        <hr>
+                        {% if not blogpost.comments.all %}
+                        No Comments Yet...
+                        Add One...
+                        {% else %}
+
+                        {% for comment in blogpost.comments.all %}
+                        <!-- Contenedor Principal -->
+                        <div class="comments-container">
+                            <ul id="comments-list" class="comments-list">
+                                <li>
+                                    <div class="comment-main-level">
+                                        <!-- Avatar -->
+                                        <div class="comment-avatar"><img src="{%for pr in profuser %}{% if pr.user_id == comment.autor_id %}{{ pr.avatar.url }}
+                                        {% endif %}{% endfor %}" alt=""></div>
+                                        <!-- Contenedor del Comentario -->
+                                        <div class="comment-box">
+                                            <div class="comment-head">
+                                                {% if comment.autor %}
+                                                <h6 class="comment-name by-author"><a href=" ">{%for pr in profuser %}
+                                                    {% if pr.user_id == comment.autor_id %}
+                                                    {{ pr.first_name }} {{ pr.last_name }}{% endif %}{% endfor %}</a>
+                                                </h6>
+                                                {% else %}
+                                                <h6 class="comment-name by-author"><a href=" ">No Author</a></h6>
+                                                {% endif %}
+                                                <span>{{ comment.time_created }}</span>
+                                                {% if user.is_authenticated and comment.autor == user %}
+                                                <a href="{% url 'comment-delete' comment.id %}"><i
+                                                        class="fa fa-trash"></i></a>
+                                                {% endif %}
+                                                <i class="fa fa-reply"> {{ comment.replies.count }}</i>
+                                                <i class="fa fa-heart"></i>
+                                            </div>
+                                            <div class="comment-content">
+                                                {{ comment.comment }}
+                                            </div>
+                                             {% if user.is_authenticated %}
+                                            <div class="row justify-content-center mt-3 mb-5">
+                                                <div class="col-md-5 cil-sm-12">
+                                                    <form method="POST" action="{% url 'reply-sent' comment.id %}">
+                                                        {% csrf_token %}
+                                                        <div class="form-error">{{ form.non_field_errors }}</div>
+                                                        {{ replyform.as_p }}
+                                                        <div class="d-grid gap-2">
+                                                            <button class="btn btn-success mt-3">Submit!</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+{% endif %}
+                                        </div>
+                                    </div>
+                                    <!-- Respuestas de los comentarios -->
+                                    {% for reply in comment.replies.all %}
+                                    <ul class="comments-list reply-list">
+                                        <li>
+                                            <!-- Avatar -->
+                                            <div class="comment-avatar"><img
+                                                    src="{%for pr in profuser %}{% if pr.user_id == reply.autor_id %}{{ pr.avatar.url }}{% endif %}{% endfor %}"
+                                                    alt=""></div>
+                                            <!-- Contenedor del Comentario -->
+                                            <div class="comment-box">
+                                                <div class="comment-head">
+                                                    {% if comment.autor %}
+                                                    <h6 class="comment-name"><a href="">{%for pr in profuser %}{% if pr.user_id == reply.autor_id %}
+                                                        {{ pr.first_name }} {{ pr.last_name }}{% endif %}{% endfor %}</a></h6>
+                                                    {% else %}
+                                                    <h6 class="comment-name"><a href="">No Author</a></h6>
+                                                    {% endif %}
+                                                    <span>{{ reply.time_created }}</span>
+                                                    {% if user.is_authenticated and reply.autor == user %}
+                                                    <a href="{% url 'reply_delete' reply.id %}"><i
+                                                            class="fa fa-trash"></i></a>
+                                                    {% endif %}
+                                                    <i class="fa fa-heart"></i>
+                                                </div>
+                                                <div class="comment-content">
+                                                    {{ reply.comment }}
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    {% endfor %}
+                                </li>
+                            </ul>
+                        </div>
+
+                        {% endfor %}
+                        {% endif %}
+                        <hr>
+
+
+                    </article>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}

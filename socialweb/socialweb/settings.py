@@ -36,6 +36,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # Application definition
 
 INSTALLED_APPS = [
+
     'main.apps.MainConfig',
     'gallery.apps.GalleryConfig',
     'blog.apps.BlogConfig',

@@ -149,33 +149,20 @@
                     </div>
                     <div class="pages box">
                         <div class="intro-title">
-                            Your pages
+                            Your friends
                             <button class="intro-menu"></button>
                         </div>
+                        {% for friends in profile.get_friends %}
+
                         <div class="user">
                             <img
                                     src="https://images.unsplash.com/photo-1f"
                                     alt=""
                                     class="user-img"
                             />
-                            <div class="username">Chandelio</div>
+                            <div class="username">{{ friends }}</div>
                         </div>
-                        <div class="user">
-                            <img
-                                    src="https://images.unsplash.cf"
-                                    alt=""
-                                    class="user-img"
-                            />
-                            <div class="username">Janet Jolie</div>
-                        </div>
-                        <div class="user">
-                            <img
-                                    src="https://images.unsplash.com/p"
-                                    alt=""
-                                    class="user-img"
-                            />
-                            <div class="username">Patrick Watsons</div>
-                        </div>
+                        {% endfor %}
                     </div>
                 </div>
                 <div class="timeline-right">

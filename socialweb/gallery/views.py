@@ -3,17 +3,19 @@ from .models import Gallery, V_Gallery
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.urls import reverse_lazy
 from .forms import *
-
+from users.models import Profile
 
 def photo(request):
-    ph = Gallery.objects.filter(autor_id=request.user.pk)
-    context = {'g_imagine': ph}
+    im = Gallery.objects.filter(autor_id=request.user.pk)
+    ph = Profile.objects.all()
+    context = {'g_imagine': im, 'profuser': ph}
     return render(request, "gallery/photo.html", context)
 
 
 def video(request):
     vd = V_Gallery.objects.filter(autor_id=request.user.pk)
-    context = {'g_video': vd}
+    ph = Profile.objects.all()
+    context = {'g_video': vd, 'profuser': ph}
     return render(request, "gallery/videos.html", context)
 
 
@@ -53,4 +55,5 @@ class UpdateImage(CreateView):
     model = Gallery
     template_name = 'gallery/update_image.html'
     success_url = reverse_lazy('photo')
+
 

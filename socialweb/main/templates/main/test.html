@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+            {% for pr in profuser %}
+            <div class="user">
+                <img
+                        src="{{ pr.avatar.url }}"
+                        class="user-img"
+                />
+                <div class="username">
+                    {{ pr.first_name }}
+                    {{ pr.last_name }}
+                    <div class="user-status"></div>
+                </div>
+            </div>
+            {% endfor %}
+            <hr>
+
+
+</body>
+</html>
