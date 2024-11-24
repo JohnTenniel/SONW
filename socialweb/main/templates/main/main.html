@@ -168,62 +168,62 @@
                         </a>
                     </div>
                 </div>
-<!--                {% elif el.video %}-->
-<!--                <div class="album box">-->
-<!--                    <div class="status-main">-->
-<!--                        <img src="{%for pr in profuser%}-->
-<!--                                        {% if el.autor_id == pr.user_id %}-->
-<!--                                            {{ pr.avatar.url }}-->
-<!--                                        {% endif %}-->
-<!--                                     {% endfor %}"-->
-<!--                             class="status-img"/>-->
-<!--                        <div class="album-detail">-->
-<!--                            <div class="album-title"><strong>{{ el.autor }}</strong> create new <span>post</span></div>-->
-<!--                            <div class="album-date">{{ el.created }}</div>-->
-<!--                        </div>-->
-<!--                        <button class="intro-menu"></button>-->
-<!--                    </div>-->
-<!--                    <div class="album-content">-->
-<!--                        {% if el.content %}-->
-<!--                        <a href="{% url 'Article' el.pk %}">{{ el.title }}</a>-->
-<!--                        {% else %}-->
-<!--                        {{ el.title }}-->
-<!--                        {% endif %}-->
-<!--                        <div class="album-photos">-->
-<!--                            <video-->
-<!--                                    src="{{ el.video.url }}"-->
-<!--                                    class="album-photo"-->
-<!--                                    controls-->
-<!--                            ></video>-->
-<!--                        </div>-->
-<!--                    <h4>{{el.description}}</h4>-->
-<!--                    </div>-->
-<!--                    <div class="album-actions">-->
-<!--                        <a href="#" class="album-action">-->
-<!--                            <svg stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"-->
-<!--                                 stroke-linejoin="round" viewBox="0 0 24 24">-->
-<!--                                <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>-->
-<!--                            </svg>-->
-<!--                            +-->
-<!--                        </a>-->
-<!--                        <a href="#" class="album-action">-->
-<!--                            <svg stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"-->
-<!--                                 stroke-linejoin="round" class="css-i6dzq1" viewBox="0 0 24 24">-->
-<!--                                <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>-->
-<!--                            </svg>-->
-<!--                            +-->
-<!--                        </a>-->
-<!--                        <a href="#" class="album-action">-->
-<!--                            <svg stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"-->
-<!--                                 stroke-linejoin="round" class="css-i6dzq1" viewBox="0 0 24 24">-->
-<!--                                <path d="M17 1l4 4-4 4"/>-->
-<!--                                <path d="M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4"/>-->
-<!--                                <path d="M21 13v2a4 4 0 01-4 4H3"/>-->
-<!--                            </svg>-->
-<!--                            +-->
-<!--                        </a>-->
-<!--                    </div>-->
-<!--                </div>-->
+                {% elif el.video %}
+                <div class="album box">
+                    <div class="status-main">
+                        <img src="{%for pr in profuser%}
+                                        {% if el.autor_id == pr.user_id %}
+                                            {{ pr.avatar.url }}
+                                        {% endif %}
+                                     {% endfor %}"
+                             class="status-img"/>
+                        <div class="album-detail">
+                            <div class="album-title"><strong>{{ el.autor }}</strong> create new <span>post</span></div>
+                            <div class="album-date">{{ el.created }}</div>
+                        </div>
+                        <button class="intro-menu"></button>
+                    </div>
+                    <div class="album-content">
+                        {% if el.content %}
+                        <a href="{% url 'Article' el.pk %}">{{ el.title }}</a>
+                        {% else %}
+                        {{ el.title }}
+                        {% endif %}
+                        <div class="album-photos">
+                            <video
+                                    src="{{ el.video.url }}"
+                                    class="album-photo"
+                                    controls
+                            ></video>
+                        </div>
+                    <h4>{{el.description}}</h4>
+                    </div>
+                    <div class="album-actions">
+                        <a href="#" class="album-action">
+                            <svg stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"
+                                 stroke-linejoin="round" viewBox="0 0 24 24">
+                                <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
+                            </svg>
+                            +
+                        </a>
+                        <a href="#" class="album-action">
+                            <svg stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"
+                                 stroke-linejoin="round" class="css-i6dzq1" viewBox="0 0 24 24">
+                                <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+                            </svg>
+                            +
+                        </a>
+                        <a href="#" class="album-action">
+                            <svg stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"
+                                 stroke-linejoin="round" class="css-i6dzq1" viewBox="0 0 24 24">
+                                <path d="M17 1l4 4-4 4"/>
+                                <path d="M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4"/>
+                                <path d="M21 13v2a4 4 0 01-4 4H3"/>
+                            </svg>
+                            +
+                        </a>
+                    </div>
+                </div>
                 {% else %}
                 <div class="album box">
                     <div class="status-main">
