@@ -6,3 +6,4 @@ admin.site.register(V_Gallery)
 admin.site.register(Album)
 
 
+

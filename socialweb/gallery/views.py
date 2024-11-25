@@ -1,9 +1,10 @@
 from django.shortcuts import render
-from .models import Gallery, V_Gallery
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.urls import reverse_lazy
 from .forms import *
 from users.models import Profile
+from django.views import View
+from gallery.models import Gallery, V_Gallery
 
 def photo(request):
     im = Gallery.objects.filter(autor_id=request.user.pk)
@@ -56,4 +57,17 @@ class UpdateImage(CreateView):
     template_name = 'gallery/update_image.html'
     success_url = reverse_lazy('photo')
 
+
+class Image(View):
+    def get(self, request, pk, *args, **kwargs):
+        post = Gallery.objects.get(pk=pk)
+        ph = Profile.objects.all()
+
+
+        context = {
+            'gpost': post,
+            'profuser': ph,
+        }
+
+        return render(request, 'gallery/hole-image.html', context)
 

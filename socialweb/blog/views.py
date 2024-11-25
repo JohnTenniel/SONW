@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Blog, CommentBlog, Reply
 from .forms import BlogForm, CommentsForm, ReplyCreateForm
@@ -113,3 +114,64 @@ def delet_reply(request, pk):
         return redirect('Article', reply.parent_comment.post.id)
 
     return render(request, 'blog/reply_delete.html', {'reply': reply})
+
+
+def like_post(request, pk):
+    post = get_object_or_404(Blog, id=pk)
+    user_exists = post.likes.filter(username=request.user.username).exists()
+
+    if post.autor != request.user:
+        if user_exists:
+            post.likes.remove(request.user)
+        else:
+            post.likes.add(request.user)
+
+    return HttpResponse(post.likes.count())
+
+
+# def like_toggle(model):
+#     def inner_func(func):
+#         def wrapper(request, *args, **kwargs):
+#             post = get_object_or_404(model, id=kwargs.get('pk'))
+#             user_exist = post.likes.filter(username=request.user.username).exists()
+#
+#             if post.autor != request.user:
+#                 if user_exist:
+#                     post.likes.remove(request.user)
+#                 else:
+#                     post.likes.add(request.user)
+#
+#             return func(request, post)
+#
+#         return wrapper
+#
+#     return inner_func
+
+
+# @like_toggle(CommentBlog)
+# def like_comment(request, post):
+#     return render(request, 'snippets/likes_comment.html', {'comment': post})
+
+def like_comment(request, pk):
+    comment = get_object_or_404(CommentBlog, id=pk)
+    user_exists = comment.likes.filter(username=request.user.username).exists()
+
+    if comment.autor != request.user:
+        if user_exists:
+            comment.likes.remove(request.user)
+        else:
+            comment.likes.add(request.user)
+
+    return HttpResponse(comment.likes.count())
+
+def like_reply(request, pk):
+    reply = get_object_or_404(Reply, id=pk)
+    user_exists = reply.likes.filter(username=request.user.username).exists()
+
+    if reply.autor != request.user:
+        if user_exists:
+            reply.likes.remove(request.user)
+        else:
+            reply.likes.add(request.user)
+
+    return HttpResponse(reply.likes.count())

@@ -4,6 +4,7 @@
 <head>
     <!--    проверить подгонку по размерам окна-->
     <link rel="stylesheet" href="{% static 'css/articleblog.css' %}"/>
+    <script src="https://unpkg.com/htmx.org@2.0.3"></script>
 </head>
 
 <div class="main">
@@ -34,6 +35,34 @@
                                 </svg>
                                 {{ blogpost.comments.count }}
                             </a></h2>
+                        <div><h2>Likes...<div id="like-{{ blogpost.id }}">{{ blogpost.likes.count }}</div>
+
+                        {% if user.is_authenticated and user != blogpost.autor %}
+                            <a hx-get="{% url 'like-post' blogpost.id %}"
+                               hx-target="#like-{{ blogpost.id }}"
+                               hx-swap="innerHTML"
+                               class="album-action">
+                                <svg
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    fill="none"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    class="css-i6dzq1"
+                                    viewBox="0 0 24 24"
+                            >
+                                    {% if user in blogpost.likes.all %}
+                                    <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
+                                    {% else %}
+                                    <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
+                                    {% endif %}
+                            </svg>
+
+
+                            </a>
+                        {% endif %}
+                        </h2>
+                        </div>
                         <hr>
                         <div class="row justify-content-center mt-3 mb-5">
                             <div class="col-md-5 cil-sm-12">
@@ -80,7 +109,22 @@
                                                         class="fa fa-trash"></i></a>
                                                 {% endif %}
                                                 <i class="fa fa-reply"> {{ comment.replies.count }}</i>
-                                                <i class="fa fa-heart"></i>
+
+                                                {% if user.is_authenticated and user != comment.autor %}
+                                                <a hx-get="{% url 'like-comment' comment.id %}"
+                                                   hx-target="#like-{{ comment.id }}"
+                                                   hx-swap="innerHTML"
+                                                   >
+                                                        {% if user in comment.likes.all %}
+                                                        <i class="fa fa-heart">like</i>
+                                                        {% else %}
+                                                        <i class="fa fa-heart"></i>
+                                                        {% endif %}
+                                                </a>{% endif %}
+                                                <i class="fa fa-heart" id="like-{{ comment.id }}">{{ comment.likes.count }}</i>
+
+
+<!--                                                {% include 'blog/snippets/likes_comment.html' %}-->
                                             </div>
                                             <div class="comment-content">
                                                 {{ comment.comment }}
@@ -98,7 +142,7 @@
                                                     </form>
                                                 </div>
                                             </div>
-{% endif %}
+                                            {% endif %}
                                         </div>
                                     </div>
                                     <!-- Respuestas de los comentarios -->
@@ -123,7 +167,18 @@
                                                     <a href="{% url 'reply_delete' reply.id %}"><i
                                                             class="fa fa-trash"></i></a>
                                                     {% endif %}
-                                                    <i class="fa fa-heart"></i>
+                                                    {% if user.is_authenticated and user != reply.autor %}
+                                                <a hx-get="{% url 'like-reply' reply.id %}"
+                                                   hx-target="#like-{{ reply.id }}"
+                                                   hx-swap="innerHTML"
+                                                   >
+                                                        {% if user in reply.likes.all %}
+                                                        <i class="fa fa-heart">like</i>
+                                                        {% else %}
+                                                        <i class="fa fa-heart"></i>
+                                                        {% endif %}
+                                                </a>{% endif %}
+                                                <i class="fa fa-heart" id="like-{{ reply.id }}">{{ reply.likes.count }}</i>
                                                 </div>
                                                 <div class="comment-content">
                                                     {{ reply.comment }}
