@@ -89,7 +89,7 @@
                                 <strong>{{ user }}</strong> create new blog post:
                                 <span><a href="{% url 'Article' post.pk %}">{{post.title}}</a></span>
                             </div>
-                            <div class="album-date">{{ post.time_created }}</div>
+                            <div class="album-date">{{ post.created }}</div>
                         </div>
                     </div>
                     <div class="album-content">

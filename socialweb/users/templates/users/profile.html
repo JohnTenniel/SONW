@@ -27,11 +27,13 @@
         <div class="main-container">
             <div class="profile">
                 <div class="profile-avatar">
+
                     <img
                             src="{{ profile.avatar.url }}"
                             alt=""
                             class="profile-img"
                     />
+
                     <div class="profile-name">{{ profile.user }}</div>
                 </div>
                 <img
@@ -152,16 +154,18 @@
                             Your friends
                             <button class="intro-menu"></button>
                         </div>
+
                         {% for friends in profile.get_friends %}
 
                         <div class="user">
                             <img
-                                    src="https://images.unsplash.com/photo-1f"
+                                    src="{%for pr in profuser %}{% if pr.user_id == reply.autor_id %}{{ pr.avatar.url }}{% endif %}{% endfor %}"
                                     alt=""
                                     class="user-img"
                             />
-                            <div class="username">{{ friends }}</div>
+                            <div class="username">{{ friends }} </div>
                         </div>
+
                         {% endfor %}
                     </div>
                 </div>

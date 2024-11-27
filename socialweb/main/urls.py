@@ -5,7 +5,7 @@ from .views import Register
 urlpatterns = [
     path('', views.main, name='main'),
 
-
+    path('last/', views.last, name='last'),
     path('test/', views.test, name='test'),
 
 

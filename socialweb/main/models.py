@@ -33,7 +33,7 @@ class Gallery(models.Model):
 
     title = models.CharField('Gallery', max_length=200)
     description = models.TextField('Gallery', blank=True)
-    image = models.ImageField('Gallery', default="default.jpg", upload_to="GIMG/%Y/%m/%d")
+    image = models.ImageField('Gallery', default="default1.jpg", upload_to="GIMG/%Y/%m/%d")
     demo_link = models.CharField('Gallery', max_length=200, blank=True)
     source_link = models.CharField('Gallery', max_length=200, blank=True)
     vote_total = models.IntegerField('Gallery', default=0, blank=True)

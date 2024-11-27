@@ -29,7 +29,7 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('title', models.CharField(max_length=200)),
                 ('description', models.TextField(blank=True)),
-                ('image', models.ImageField(default='default.jpg', upload_to='GIMG/%Y/%m/%d')),
+                ('image', models.ImageField(default='default1.jpg', upload_to='GIMG/%Y/%m/%d')),
                 ('demo_link', models.CharField(blank=True, max_length=200)),
                 ('source_link', models.CharField(blank=True, max_length=200)),
                 ('vote_total', models.IntegerField(blank=True, default=0)),

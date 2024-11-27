@@ -1,36 +1,7 @@
 {% extends 'main/base.html' %}
 {% load static %}
 {% block content %}
-<!--<script src="{% static 'js/photo.js' %}"></script>-->
 
-
-<!--&lt;!&ndash;-->
-<!--Swaying photo gallery - scroll event-->
-<!--Created on AUGUST 29, 2023-->
-<!--Copyright (c) 2023 by Wakana Y.K. (https://codepen.io/wakana-k/pen/WNLrWMm)-->
-<!--&ndash;&gt;-->
-<!--&lt;!&ndash;-->
-<!--Related works :-->
-<!--Portforio design @wakana-k - https://codepen.io/wakana-k/pen/BaxKKvE-->
-<!--Swaying photo gallery - hover event @wakana-k - https://codepen.io/wakana-k/pen/oNJxbPw-->
-<!--&ndash;&gt;-->
-
-<!--<body class="bodygall">-->
-<!--<main class="galp">-->
-<!--	<div id="gallery">-->
-<!--		<h1>Create post</h1>-->
-<!--		<a href="{% url 'addimage'%}">Create</a>-->
-<!--		{% for img in g_imagine %}-->
-<!--			<figure>-->
-<!--				<img src="{{ img.image.url }}" alt="{{ img.description }}" title="{{ img.title }}">-->
-<!--				<figcaption>{{ img.title }}</figcaption>-->
-<!--			</figure>-->
-<!--		{% endfor %}-->
-<!--	</div>-->
-<!--</main>-->
-
-<!--<footer id='info'>Codepen by <a target="_blank" href="https://codepen.io/wakana-k/">Wakana Y.K.</a></footer>-->
-<!--</body>-->
 <div class="main">
     <div class="search-bar">
         <input type="text" placeholder="Search"/>
@@ -77,24 +48,31 @@
                         </div>
                     </div>
                     <div class="album-actions">
-                        <a href="{% url 'main' %}" class="album-action">
-                            <svg
+                        {% if user.is_authenticated and user != img.author %}
+                            <a hx-get="{% url 'like-img' img.id %}"
+                               hx-target="#like-{{ img.id }}"
+                               hx-swap="innerHTML"
+                               class="album-action">
+                                <svg
                                     stroke="currentColor"
                                     stroke-width="2"
                                     fill="none"
                                     stroke-linecap="round"
                                     stroke-linejoin="round"
+                                    class="css-i6dzq1"
                                     viewBox="0 0 24 24"
                             >
-                                <path
-                                        d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5
-.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.
-06a5.5 5.5 0 000-7.78z"
-                                />
+                                    {% if user in img.likes.all %}
+                                    <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
+                                    {% else %}
+                                    <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
+                                    {% endif %}
                             </svg>
-                            87
-                        </a>
-                        <a href="#" class="album-action">
+                                <div id="like-{{ img.id }}">{{ img.likes.count }}</div>
+
+                            </a>
+                        {% endif %}
+                        <a href="{% url 'hole-image' img.pk %}" class="album-action">
                             <svg
                                     stroke="currentColor"
                                     stroke-width="2"
@@ -108,7 +86,12 @@
                                         d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"
                                 />
                             </svg>
-                            20
+                            {% if img.commentsimg.count %}
+                            {{ img.commentsimg.count }}
+                            {% else %}
+                            add comment
+                            {% endif %}
+
                         </a>
                         <a href="#" class="album-action">
                             <svg

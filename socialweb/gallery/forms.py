@@ -13,3 +13,51 @@ class VideoForm(forms.ModelForm):
     class Meta:
         model = V_Gallery
         fields = ['title', 'description', 'video']
+
+
+class CommentsIMGForm(forms.ModelForm):
+    class Meta:
+        model = CommentIMG
+        fields = ['comment']
+        widgets = {
+            'comment': forms.TextInput(attrs={'placeholder': 'Add comment...'})
+        }
+        label = {
+            'comment': ''
+        }
+
+
+class ReplyIMGCreateForm(forms.ModelForm):
+    class Meta:
+        model = ReplyIMG
+        fields = ['comment']
+        widgets = {
+            'comment': forms.TextInput(attrs={'placeholder': 'Add reply...', 'class': "!text-sm"})
+        }
+        label = {
+            'comment': ''
+        }
+
+
+class CommentsVGForm(forms.ModelForm):
+    class Meta:
+        model = CommentVG
+        fields = ['comment']
+        widgets = {
+            'comment': forms.TextInput(attrs={'placeholder': 'Add comment...'})
+        }
+        label = {
+            'comment': ''
+        }
+
+
+class ReplyVGCreateForm(forms.ModelForm):
+    class Meta:
+        model = ReplyVG
+        fields = ['comment']
+        widgets = {
+            'comment': forms.TextInput(attrs={'placeholder': 'Add reply...', 'class': "!text-sm"})
+        }
+        label = {
+            'comment': ''
+        }

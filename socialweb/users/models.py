@@ -28,7 +28,7 @@ class Profile(models.Model):
     is_active = models.BooleanField(default=True)
     middle_name = models.CharField(max_length=50, blank=True)
     phone = models.CharField(max_length=14, blank=True)
-    avatar = models.ImageField(upload_to="prof/%Y/%m/%d", blank=True)
+    avatar = models.ImageField(upload_to="prof/%Y/%m/%d", blank=True, default="default.jpeg")
     friends = models.ManyToManyField(User, blank=True)
     update = models.DateTimeField(auto_now=True)
     create = models.DateTimeField(auto_now_add=True)
