@@ -9,8 +9,10 @@ from django.urls import reverse_lazy
 from users.models import Profile
 from django.views import View
 from django.contrib.messages import Message
+from django.contrib.auth.decorators import login_required
 
 
+@login_required
 def blog(request):
     bg = Blog.objects.filter(autor_id=request.user.pk)
     ph = Profile.objects.all()
@@ -18,7 +20,6 @@ def blog(request):
     return render(request, "blog/mainblog.html", context)
 
 
-#
 
 class Article(View):
     def get(self, request, pk, *args, **kwargs):

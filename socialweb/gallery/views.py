@@ -8,15 +8,17 @@ from django.views import View
 from gallery.models import Gallery, V_Gallery, CommentIMG, CommentVG, ReplyIMG, ReplyVG
 from django.http import HttpResponse
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 
+@login_required
 def photo(request):
     im = Gallery.objects.filter(autor_id=request.user.pk)
     ph = Profile.objects.all()
     context = {'g_imagine': im, 'profuser': ph}
     return render(request, "gallery/photo.html", context)
 
-
+@login_required
 def video(request):
     vd = V_Gallery.objects.filter(autor_id=request.user.pk)
     ph = Profile.objects.all()

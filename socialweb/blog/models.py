@@ -14,9 +14,15 @@ class Blog(models.Model):
     is_published = models.BooleanField(default=True, verbose_name='Опубликовано')
     autor = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     likes = models.ManyToManyField(User, related_name="likedposts", through="LikedPost")
+    short_content = models.CharField(max_length=100, default='', blank=True)
 
     class Meta:
         ordering = ['-created']
+
+    def save(self, *args, **kwargs):
+        if not self.short_content:
+            self.short_content = self.content[:100]
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.title

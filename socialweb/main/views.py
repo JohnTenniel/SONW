@@ -9,11 +9,14 @@ from blog.models import Blog, CommentBlog, Reply
 from django.core.paginator import Paginator
 import random
 import operator
+from django.views.generic import ListView
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 
 # import random
 # random
-
+@login_required
 def main(request):
     ph = Profile.objects.all()
     gl = Gallery.objects.all()
@@ -27,13 +30,20 @@ def main(request):
     return render(request, "main/main.html", context)
 
 
+@login_required
 def test(request):
     ph = Profile.objects.all()
     bg = Blog.objects.all()
     fr = ph.sender.all()
     context = {'profuser': ph, 'mblog': bg, 'fr': fr}
     return render(request, "main/test.html", context)
+@login_required
+def setbarbar(request):
+    ph = Profile.objects.all()
+    context = {'profuser': ph}
+    return render(request, "main/setbar.html", context)
 
+@login_required
 def last(request):
     ph = Profile.objects.all()
     gl = Gallery.objects.all()
@@ -48,13 +58,12 @@ def last(request):
     # page = int(request.GET.get('page', 1))
     # ch = paginator.page(page)
 
-    context = {'profuser': ph, 'gall': gl, 'vgall': vd, 'mblog': bg, 'changemain': ch, 'cbl': cb}
+    context = {'profuser': ph, 'gall': gl, 'vgall': vd, 'mblog': bg, 'changemain': ch}
 
     # if request.htmx:
     #     return render(request, "snippets/looplastnwes.html", context)
 
     return render(request, "main/last_news.html", context)
-
 
 
 class Register(View):
@@ -80,3 +89,6 @@ class Register(View):
             'form': form
         }
         return render(request, self.template_name, context)
+
+
+

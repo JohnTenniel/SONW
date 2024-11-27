@@ -11,8 +11,8 @@
 
 /* Start body rules */
 body {
-    background-image: linear-gradient(-225deg, #E3FDF5 0%, #FFE6FA 100%);
-background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
+
+    background-image:url("https://res.cloudinary.com/dtk2o5pc4/image/upload/v1470238639/bg1_mg97hp.jpg");
 background-attachment: fixed;
   background-repeat: no-repeat;
 
@@ -20,7 +20,7 @@ background-attachment: fixed;
 /*   the main font */
     font-family: 'Abel', sans-serif;
 opacity: .95;
-/* background-image: linear-gradient(to top, #d9afd9 0%, #97d9e1 100%); */
+
 }
 
 
@@ -40,9 +40,9 @@ form {
     height: auto;
     border-radius: 5px;
     margin: 2% auto;
-    box-shadow: 0 9px 50px hsla(20, 67%, 75%, 0.31);
+    box-shadow: 0 9px 200px #4c3573;
     padding: 2%;
-    background-image: linear-gradient(-225deg, #E3FDF5 50%, #FFE6FA 50%);
+    background: rgba(255, 255, 255, 0.9);
 }
 /* form Container */
 form .con {
@@ -89,12 +89,12 @@ header p {letter-spacing: 0.05em;}
 
 /* Show/hide password Font Icon */
 #eye {
-    background: #fff;
+
     color: #333;
 
     margin: 5.9px 0 0 0;
     margin-left: -30px;
-    padding: 15px 9px 19px 0px;
+    padding: 14.5px 10px 15px 0px;
     border-radius: 0px 5px 5px 0px;
 
     float: right;
@@ -123,6 +123,9 @@ input[class="form-input"]{
     border-radius: 0px 5px 5px 0px;
     transition: 0.2s linear;
 
+    box-shadow: 0 0 10px #4c3573;
+
+
 }
 input[id="txt-input"] {width: 250px;}
 /* focus  */
@@ -144,7 +147,7 @@ button {
     height: 50px;
 
     padding: 0 20px;
-    background: #fff;
+    background: #97969f;;
     border-radius: 5px;
 
     outline: none;

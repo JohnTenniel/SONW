@@ -1169,3 +1169,74 @@ ________________________________________________
 }
 
 ________________________________________________
+::-webkit-input-placeholder {
+    color: white;
+}
+:-moz-placeholder {
+    color: white;
+}
+::-moz-placeholder {
+    color: white;
+}
+:-ms-input-placeholder {
+    color: white;
+}
+
+.navigation {
+  background: #151728;;
+  display: flex;
+  font-size: 10px;
+  font-weight: normal;
+  padding-left: 0;
+  
+
+
+  a {
+    background: #151728;;
+    color: white;
+    text-decoration: none;
+    line-height: 60px;
+    display: block;
+    padding: 0 25px;
+
+    &:hover {
+      background-color: #2e2e2e;
+    }
+  }
+  .maina{
+    padding: 0;
+  }
+
+  li {
+    font-size: 14px;
+    list-style: none;
+    position: relative;
+   
+
+    &:not(:last-child) {
+      border-right: 1px solid #2e2e2e;
+    }
+
+
+    &:hover {
+      .subnav {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: all;
+      }
+    }
+  }
+
+  .subnav {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    z-index: 10;
+    transform: translateY(10px);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity .2s, transform .2s;
+    width: 232px;
+
+  }
+ ________________________________________________

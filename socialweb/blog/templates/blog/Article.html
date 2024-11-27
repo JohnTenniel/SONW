@@ -15,9 +15,17 @@
                     <article class="art_blog">
                         <h1 class="main_title">{{ blogpost.title }}</h1>
                         <p class="author"> by {{ blogpost.autor }}<br/>Published on: {{ blogpost.created }}</p>
+                        {% if post.photo %}
                         <img src="{{ blogpost.photo.url }}" alt="здесь было изображение"
+                             {% else %}
+                        <img src="" alt=""
+                             {% endif %}
                              style="display: block; margin: auto; width: 70%;">
+                        {% if blogpost.content %}
                         <p class="intro">{{ blogpost.content }}</p>
+                        {% else %}
+                        <hr>
+                        {% endif %}
                         <h2>Comments...
                             <a href="#" class="album-action">
                                 <svg

@@ -7,6 +7,8 @@ urlpatterns = [
 
     path('last/', views.last, name='last'),
     path('test/', views.test, name='test'),
+    path('setbar/', views.setbarbar, name='setbar'),
+
 
 
     path('', include('django.contrib.auth.urls')),
