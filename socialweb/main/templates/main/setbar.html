@@ -40,7 +40,7 @@
                 <li>
                     <a class="maina" href="#"> <img src="{{ pr.avatar.url}}" alt="" class="account-profile" alt=""/> <span>▼</span></a>
                     <ul class="subnav">
-                        <li><a href="#">Настройки</a></li>
+                        <li><a href="{% url 'profile-edit' %}">Настройки</a></li>
                         <li><a href="#">Приложение</a></li>
                         <li>
                             {% if user.is_authenticated %}

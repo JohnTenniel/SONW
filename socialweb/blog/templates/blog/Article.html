@@ -13,9 +13,9 @@
             <div class="timeline-right">
                 <div class="profile">
                     <article class="art_blog">
-                        <h1 class="main_title">{{ blogpost.title }}</h1>
+                        <h1 class="main_title">{{ blogpost.title }}</h1><h5><a href="{% url 'updatepost' blogpost.pk %}">edit</a></h5>
                         <p class="author"> by {{ blogpost.autor }}<br/>Published on: {{ blogpost.created }}</p>
-                        {% if post.photo %}
+                        {% if blogpost.photo %}
                         <img src="{{ blogpost.photo.url }}" alt="здесь было изображение"
                              {% else %}
                         <img src="" alt=""

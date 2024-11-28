@@ -12,10 +12,12 @@ import operator
 from django.views.generic import ListView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from gallery.forms import GaleryForm
+from django.views.generic import CreateView
+from django.urls import reverse_lazy
+from django.views.generic.edit import UpdateView
 
 
-# import random
-# random
 @login_required
 def main(request):
     ph = Profile.objects.all()
@@ -37,11 +39,14 @@ def test(request):
     fr = ph.sender.all()
     context = {'profuser': ph, 'mblog': bg, 'fr': fr}
     return render(request, "main/test.html", context)
+
+
 @login_required
 def setbarbar(request):
     ph = Profile.objects.all()
     context = {'profuser': ph}
     return render(request, "main/setbar.html", context)
+
 
 @login_required
 def last(request):

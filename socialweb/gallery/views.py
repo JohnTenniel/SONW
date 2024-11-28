@@ -58,9 +58,10 @@ class AddVideo(CreateView):
         return super().form_valid(form)
 
 
-class UpdateImage(CreateView):
+class UpdateImage(UpdateView):
     model = Gallery
     template_name = 'gallery/update_image.html'
+    fields = ['title', 'description', 'image']
     success_url = reverse_lazy('photo')
 
 
@@ -70,9 +71,10 @@ class DeleteIMG(DeleteView):
     success_url = reverse_lazy('photo')
 
 
-class UpdateVideo(CreateView):
+class UpdateVideo(UpdateView):
     model = V_Gallery
     template_name = 'gallery/update_video.html'
+    fields = ['title', 'description', 'video']
     success_url = reverse_lazy('videos')
 
 

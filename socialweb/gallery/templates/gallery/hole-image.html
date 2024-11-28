@@ -14,7 +14,7 @@
                     <article class="art_blog">
 
                     <!--__________Title Page_______-->
-                        <h1 class="main_title">{{ gpost.title }}</h1>
+                        <h1 class="main_title">{{ gpost.title }}</h1><h5><a href="{% url 'updateimg' gpost.pk %}">edit</a></h5>
 
                     <!--__________Author and date Page_______-->
                         <p class="author"> by {{ gpost.autor }}<br/>Published on: {{ gpost.created }}</p>

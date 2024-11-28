@@ -12,7 +12,7 @@
             <div class="timeline-right">
                 <div class="profile">
                     <article class="art_blog">
-                        <h1 class="main_title">{{ gpost.title }}</h1>
+                        <h1 class="main_title">{{ gpost.title }}</h1><h5><a href="{% url 'updatevg' gpost.pk %}">edit</a></h5>
                         <p class="author"> by {{ gpost.autor }}<br/>Published on: {{ gpost.created }}</p>
                         <video
                                     src="{{ gpost.video.url }}"

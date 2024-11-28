@@ -4,6 +4,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.utils.translation import gettext_lazy as _
 
 
+
+
 User = get_user_model()
 
 
@@ -17,5 +19,4 @@ class UserCreationForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = User
         fields = ("username", "email")
-
 

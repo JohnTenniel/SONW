@@ -184,11 +184,12 @@
                         {{ el.title }}
                         {% endif %}
                         <div class="album-photos">
-                            {% if post.photo %}
+                            {% if el.photo %}
                             <img src="{{el.photo.url}}" alt="" class="album-photo"/>
                                  {% else %}
                             <img src="" alt="" class="album-photo"/>
                                  {% endif %}
+
                         </div>
                         {% if el.short_content %}
                         <h4>{{el.short_content}} ...</h4>

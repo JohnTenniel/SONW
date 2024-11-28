@@ -44,7 +44,6 @@ class Profile(models.Model):
     def get_friends_no(self):
         return self.friends.all().count()
 
-
     def __str__(self):
         return str(self.user)
 
@@ -64,3 +63,10 @@ class Relationship(models.Model):
 
     def __str__(self):
         return f'{self.sender}-{self.receiver}-{self.status}'
+
+
+class Status(models.Model):
+    content = models.TextField(blank=True)
+
+    def __str__(self):
+        return str(self.content)
