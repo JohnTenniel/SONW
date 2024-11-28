@@ -4,6 +4,6 @@ from .views import my_profile
 
 
 urlpatterns = [
-    path('profile/', my_profile, name='profile'),
+    path('profile/<int:pk>', my_profile, name='profile'),
 
 ]

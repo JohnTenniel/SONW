@@ -4,7 +4,6 @@
 <head>
     <!--    проверить подгонку по размерам окна-->
     <link rel="stylesheet" href="{% static 'css/articleblog.css' %}"/>
-    <script src="https://unpkg.com/htmx.org@2.0.3"></script>
 </head>
 
 <div class="main">
@@ -13,19 +12,15 @@
             <div class="timeline-right">
                 <div class="profile">
                     <article class="art_blog">
-                        <h1 class="main_title">{{ blogpost.title }}</h1>
-                        <p class="author"> by {{ blogpost.autor }}<br/>Published on: {{ blogpost.created }}</p>
-                        {% if post.photo %}
-                        <img src="{{ blogpost.photo.url }}" alt="здесь было изображение"
-                             {% else %}
-                        <img src="" alt=""
-                             {% endif %}
-                             style="display: block; margin: auto; width: 70%;">
-                        {% if blogpost.content %}
-                        <p class="intro">{{ blogpost.content }}</p>
-                        {% else %}
-                        <hr>
-                        {% endif %}
+                        <h1 class="main_title">{{ gpost.title }}</h1>
+                        <p class="author"> by {{ gpost.autor }}<br/>Published on: {{ gpost.created }}</p>
+                        <video
+                                    src="{{ gpost.video.url }}"
+                                    class="album-photo"
+                                    controls
+                            ></video>
+                        <p class="intro">{{ gpost.description }}</p>
+                    <!--__________ Comment count block _______-->
                         <h2>Comments...
                             <a href="#" class="album-action">
                                 <svg
@@ -41,58 +36,61 @@
                                             d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"
                                     />
                                 </svg>
-                                {{ blogpost.comments.count }}
+                                {{ gpost.commentsvg.count }}
                             </a>
                         </h2>
-                        <div>
-                            <h2>Likes...
-                                <div id="like-{{ blogpost.id }}">{{ blogpost.likes.count }}</div>
-                                {% if user.is_authenticated and user != blogpost.autor %}
-                                <a hx-get="{% url 'like-post' blogpost.id %}"
-                               hx-target="#like-{{ blogpost.id }}"
+                    <!--__________ Like count and use block _______-->
+                        <h2>
+                            Likes...
+                            <div id="like-{{ gpost.id }}">{{ gpost.likes.count }}</div>
+                            {% if user.is_authenticated and user != gpost.autor %}
+                            <a hx-get="{% url 'like-VG' gpost.id %}"
+                               hx-target="#like-{{ gpost.id }}"
                                hx-swap="innerHTML"
                                class="album-action">
                                 <svg
-                                    stroke="currentColor"
-                                    stroke-width="2"
-                                    fill="none"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    class="css-i6dzq1"
-                                    viewBox="0 0 24 24"
-                            >
-                                    {% if user in blogpost.likes.all %}
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        fill="none"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="css-i6dzq1"
+                                        viewBox="0 0 24 24"
+                                >
+                                    {% if user in gpost.likes.all %}
+                                    <i class="fa fa-heart"></i>
                                     <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
                                     {% else %}
+                                    <i class="fa fa-heart"></i>
                                     <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
                                     {% endif %}
-                            </svg>
+                                </svg>
                             </a>
-                                {% endif %}
-                            </h2>
-                        </div>
+                            {% endif %}
+                        </h2>
                         <hr>
+                    <!--__________ Add Comment Blok _______-->
                         <div class="row justify-content-center mt-3 mb-5">
                             <div class="col-md-5 cil-sm-12">
-                                <form method="POST" action="{% url 'comment-sent' blogpost.id %}">
+                                <form method="POST" action="{% url 'commentVG-sent' gpost.id %}">
                                     {% csrf_token %}
                                     <div class="form-error">{{ form.non_field_errors }}</div>
-                                    {{ commentform.as_p }}
+                                    {{ commentvgform.as_p }}
                                     <div class="d-grid gap-2">
                                         <button class="btn btn-success mt-3">Submit!</button>
                                     </div>
                                 </form>
                             </div>
                         </div>
-
+                    <!--__________ Comment Blok _______-->
                         <hr>
                         <hr>
-                        {% if not blogpost.comments.all %}
+                        {% if not gpost.commentsvg.all %}
                         No Comments Yet...
                         Add One...
                         {% else %}
 
-                        {% for comment in blogpost.comments.all %}
+                        {% for comment in gpost.commentsvg.all %}
                         <!-- Contenedor Principal -->
                         <div class="comments-container">
                             <ul id="comments-list" class="comments-list">
@@ -114,30 +112,22 @@
                                                 {% endif %}
                                                 <span>{{ comment.time_created }}</span>
                                                 {% if user.is_authenticated and comment.autor == user %}
-                                                <a href="{% url 'comment-delete' comment.id %}"><i
+                                                <a href="{% url 'commentvg-delete' comment.id %}"><i
                                                         class="fa fa-trash"></i></a>
                                                 {% endif %}
                                                 <i class="fa fa-reply"> {{ comment.replies.count }}</i>
 
                                                 {% if user.is_authenticated and user != comment.autor %}
-
-                                                <a hx-get="{% url 'like-comment' comment.id %}"
+                                                <a hx-get="{% url 'like-commentvg' comment.id %}"
                                                    hx-target="#like-{{ comment.id }}"
                                                    hx-swap="innerHTML"
                                                    >
-                                                        {% if user in comment.likes.all %}
-                                                    <i class="fa fa-heart" id="like-{{ comment.id }}">{{ comment.likes.count }}</i>
-                                                        {% else %}
-                                                    <i class="fa fa-heart-o" id="like-{{ comment.id }}">{{ comment.likes.count }}</i>
-                                                        {% endif %}
+                                                <i class="fa fa-heart" id="like-{{ comment.id }}">{{ comment.likes.count }}</i>
                                                 </a>
-                                                {% else %}
+                                                {% elif user.is_authenticated and user == comment.autor %}
                                                 <i class="fa fa-heart">{{ comment.likes.count }}</i>
                                                 {% endif %}
-
-
-
-
+<!--                                                {% include 'blog/snippets/likes_comment.html' %}-->
                                             </div>
                                             <div class="comment-content">
                                                 {{ comment.comment }}
@@ -145,10 +135,10 @@
                                              {% if user.is_authenticated %}
                                             <div class="row justify-content-center mt-3 mb-5">
                                                 <div class="col-md-5 cil-sm-12">
-                                                    <form method="POST" action="{% url 'reply-sent' comment.id %}">
+                                                    <form method="POST" action="{% url 'replyVG-sent' comment.id %}">
                                                         {% csrf_token %}
                                                         <div class="form-error">{{ form.non_field_errors }}</div>
-                                                        {{ replyform.as_p }}
+                                                        {{ replyvgform.as_p }}
                                                         <div class="d-grid gap-2">
                                                             <button class="btn btn-success mt-3">Submit!</button>
                                                         </div>
@@ -159,7 +149,7 @@
                                         </div>
                                     </div>
                                     <!-- Respuestas de los comentarios -->
-                                    {% for reply in comment.replies.all %}
+                                    {% for reply in comment.repliesvg.all %}
                                     <ul class="comments-list reply-list">
                                         <li>
                                             <!-- Avatar -->
@@ -177,23 +167,21 @@
                                                     {% endif %}
                                                     <span>{{ reply.time_created }}</span>
                                                     {% if user.is_authenticated and reply.autor == user %}
-                                                    <a href="{% url 'reply_delete' reply.id %}"><i
+                                                    <a href="{% url 'replyvg_delete' reply.id %}"><i
                                                             class="fa fa-trash"></i></a>
                                                     {% endif %}
                                                     {% if user.is_authenticated and user != reply.autor %}
-                                                <a hx-get="{% url 'like-reply' reply.id %}"
+                                                <a hx-get="{% url 'like-replyvg' reply.id %}"
                                                    hx-target="#like-{{ reply.id }}"
                                                    hx-swap="innerHTML"
                                                    >
-                                                        {% if user in reply.likes.all %}
-                                                        <i class="fa fa-heart" id="like-{{ reply.id }}">{{ reply.likes.count }}</i>
-                                                        {% else %}
-                                                        <i class="fa fa-heart" id="like-{{ reply.id }}">{{ reply.likes.count }}</i>
-                                                        {% endif %}
+
+                                                <i class="fa fa-heart" id="like-{{ reply.id }}">{{ reply.likes.count }}</i>
                                                 </a>
-                                                    {% else %}
-                                                <i class="fa fa-heart">{{ reply.likes.count }}</i>
-                                                {% endif %}
+                                                    {% elif user.is_authenticated and user == reply.autor %}
+                                                    <i class="fa fa-heart">{{ reply.likes.count }}</i>
+                                                    {% endif %}
+
                                                 </div>
                                                 <div class="comment-content">
                                                     {{ reply.comment }}

@@ -18,7 +18,7 @@
                                      {% endfor %}"
                              class="status-img"/>
                         <div class="album-detail">
-                            <div class="album-title"><strong>{{ el.autor }}</strong> create new <span>post</span></div>
+                            <div class="album-title"><strong><a href="{% url 'profile' el.autor.pk %}">{{ el.autor }}</a></strong> create new <span>post</span></div>
                             <div class="album-date">{{ el.created }}</div>
                         </div>
                         <button class="intro-menu"></button>

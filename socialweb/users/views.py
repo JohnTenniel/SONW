@@ -8,8 +8,8 @@ from django.contrib.auth.decorators import login_required
 
 
 @login_required
-def my_profile(request):
-    profile = Profile.objects.get(user=request.user)
+def my_profile(request, pk):
+    profile = Profile.objects.get(pk=pk)
     ph = Profile.objects.all()
     context = {'profile': profile, 'profuser': ph}
     return render(request, 'users/profile.html', context)

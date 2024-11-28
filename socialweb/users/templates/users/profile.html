@@ -18,7 +18,7 @@
                     <div class="profile-name">{{ profile.user }}</div>
                 </div>
                 <img
-                        src="{% static 'images/pc1.jpg' %}"
+                        src="{{ profile.bg_PIC.url }}"
                         alt=""
                         class="profile-cover"
                 />
@@ -82,7 +82,7 @@
                                     />
                                     <path d="M9 22V12h6v10"/>
                                 </svg>
-                                Live in <a href="#">Hanoi, Vietnam</a>
+                                Live in <a href="#">{{ profile.location }}</a>
                             </div>
                             <div class="info-item">
                                 <svg
@@ -110,7 +110,7 @@
 .7l21.8 21.7L85.9 404.8a225.3 225.3 0 01-55.8-145.2z"
                                     />
                                 </svg>
-                                Player name <a href="#">{{ profile.user }}</a>
+                                Real name <a href="#">{{ profile.first_name }} {{ profile.last_name }}</a>
                             </div>
                         </div>
                     </div>

@@ -1,0 +1,12 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block content %}
+
+<h1>Delete post</h1>
+<hr>
+<h3>Delete: {{ blog.title }}</h3>
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <button class="btn btn-secondary">Удалить</button>
+</form>
+    {% endblock %}

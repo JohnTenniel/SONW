@@ -32,12 +32,19 @@ class Profile(models.Model):
     friends = models.ManyToManyField(User, blank=True)
     update = models.DateTimeField(auto_now=True)
     create = models.DateTimeField(auto_now_add=True)
+    birth_date = models.DateField(blank=True, null=True)
+    location = models.CharField(max_length=100, blank=True, null=True)
+    proffecy = models.CharField(max_length=100, blank=True, null=True)
+    bg_PIC = models.ImageField(upload_to="prof/%Y/%m/%d", blank=True, default="defbg.jpg")
+    status = models.CharField(max_length=250, blank=True, null=True)
 
     def get_friends(self):
         return self.friends.all()
 
     def get_friends_no(self):
         return self.friends.all().count()
+
+
     def __str__(self):
         return str(self.user)
 

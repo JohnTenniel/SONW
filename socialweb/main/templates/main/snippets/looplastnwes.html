@@ -1,0 +1,256 @@
+<script src="https://unpkg.com/htmx.org@2.0.3"></script>
+<!--<fade-in class="opacity-0" ="on load transition my opacity to 1 over 0.2 seconds">-->
+{% for el in changemain %}
+
+
+{% if el.image %}
+<div class="album box">
+    <div class="status-main">
+        <img src="{%for pr in profuser%}
+                                        {% if el.autor_id == pr.user_id %}
+                                            {{ pr.avatar.url }}
+                                        {% endif %}
+                                     {% endfor %}"
+             class="status-img"/>
+        <div class="album-detail">
+            <div class="album-title"><strong>{{ el.autor }}</strong> create new <span>post</span></div>
+            <div class="album-date">{{ el.created }}</div>
+        </div>
+        <button class="intro-menu"></button>
+    </div>
+    <div class="album-content">
+        {% if el.description %}
+        <a href="{% url 'hole-image' el.pk %}">{{ el.title }}</a>
+        {% else %}
+        {{ el.title }}
+        {% endif %}
+        <div class="album-photos">
+            <img
+                    src="{{el.image.url}}"
+                    alt=""
+                    class="album-photo"
+            />
+        </div>
+        <h4>{{el.description}}</h4>
+    </div>
+    <div class="album-actions">
+        {% if user.is_authenticated and user != gall.author %}
+        <a hx-get="{% url 'like-img' el.id %}"
+           hx-target="#like-{{ el.id }}"
+           hx-swap="innerHTML"
+           class="album-action">
+            <svg
+                    stroke="currentColor"
+                    stroke-width="2"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="css-i6dzq1"
+                    viewBox="0 0 24 24"
+            >
+                {% if user in el.likes.all %}
+                <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
+                {% else %}
+                <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
+                {% endif %}
+            </svg>
+            <div id="like-{{ el.id }}">{{ el.likes.count }}</div>
+
+        </a>
+        {% endif %}
+        <a href="{% url 'hole-image' el.pk %}" class="album-action">
+            <svg stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"
+                 stroke-linejoin="round" class="css-i6dzq1" viewBox="0 0 24 24">
+                <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+            </svg>
+            {% if el.commentsimg.count %}
+            {{ el.commentsimg.count }}
+            {% else %}
+            add comment
+            {% endif %}
+        </a>
+        <a href="#" class="album-action">
+            <svg stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"
+                 stroke-linejoin="round" class="css-i6dzq1" viewBox="0 0 24 24">
+                <path d="M17 1l4 4-4 4"/>
+                <path d="M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4"/>
+                <path d="M21 13v2a4 4 0 01-4 4H3"/>
+            </svg>
+            +
+        </a>
+    </div>
+</div>
+{% elif el.video %}
+<div class="album box">
+    <div class="status-main">
+        <img src="{%for pr in profuser%}
+                                        {% if el.autor_id == pr.user_id %}
+                                            {{ pr.avatar.url }}
+                                        {% endif %}
+                                     {% endfor %}"
+             class="status-img"/>
+        <div class="album-detail">
+            <div class="album-title"><strong>{{ el.autor }}</strong> create new <span>post</span></div>
+            <div class="album-date">{{ el.created }}</div>
+        </div>
+        <button class="intro-menu"></button>
+    </div>
+    <div class="album-content">
+        {% if el.content %}
+        <a href="{% url 'Article' el.pk %}">{{ el.title }}</a>
+        {% else %}
+        {{ el.title }}
+        {% endif %}
+        <div class="album-photos">
+            <video
+                    src="{{ el.video.url }}"
+                    class="album-photo"
+                    controls
+            ></video>
+        </div>
+        <h4>{{el.description}}</h4>
+    </div>
+    <div class="album-actions">
+        {% if user.is_authenticated and user != vgall.author %}
+        <a hx-get="{% url 'like-VG' el.id %}"
+           hx-target="#like-{{ el.id }}"
+           hx-swap="innerHTML"
+           class="album-action">
+            <svg
+                    stroke="currentColor"
+                    stroke-width="2"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="css-i6dzq1"
+                    viewBox="0 0 24 24"
+            >
+                {% if user in el.likes.all %}
+                <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
+                {% else %}
+                <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
+                {% endif %}
+            </svg>
+            <div id="like-{{ el.id }}">{{ el.likes.count }}</div>
+
+        </a>
+        {% endif %}
+        <a href="{% url 'hole-video' el.pk %}" class="album-action">
+            <svg stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"
+                 stroke-linejoin="round" class="css-i6dzq1" viewBox="0 0 24 24">
+                <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+            </svg>
+            {% if el.commentsvg.count %}
+            {{ el.commentsvg.count }}
+            {% else %}
+            add comment
+            {% endif %}
+        </a>
+        <a href="#" class="album-action">
+            <svg stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"
+                 stroke-linejoin="round" class="css-i6dzq1" viewBox="0 0 24 24">
+                <path d="M17 1l4 4-4 4"/>
+                <path d="M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4"/>
+                <path d="M21 13v2a4 4 0 01-4 4H3"/>
+            </svg>
+            +
+        </a>
+    </div>
+</div>
+{% else %}
+<div class="album box">
+    <div class="status-main">
+        <img src="{%for pr in profuser%}
+                                        {% if el.autor_id == pr.user_id %}
+                                            {{ pr.avatar.url }}
+                                        {% endif %}
+                                     {% endfor %}"
+             class="status-img"/>
+        <div class="album-detail">
+            <div class="album-title"><strong>{{ el.autor }}</strong> create new <span>post</span></div>
+            <div class="album-date">{{ el.created }}</div>
+        </div>
+        <button class="intro-menu"></button>
+    </div>
+    <div class="album-content">
+        {% if el.content %}
+        <a href="{% url 'Article' el.pk %}">{{ el.title }}</a>
+        {% else %}
+        {{ el.title }}
+        {% endif %}
+        <div class="album-photos">
+             {% if post.photo %}
+                            <img src="{{el.photo.url}}" alt="" class="album-photo"/>
+                                 {% else %}
+                            <img src="" alt="" class="album-photo"/>
+                                 {% endif %}
+        </div>
+           {% if el.short_content %}
+                        <h4>{{el.short_content}} ...</h4>
+                        {% else %}
+                        <h4>{{el.content}}</h4>
+                        {% endif %}
+    </div>
+    <div class="album-actions">
+        {% if user.is_authenticated and user != blogpost.author %}
+        <a hx-get="{% url 'like-post' el.id %}"
+           hx-target="#like-{{ el.id }}"
+           hx-swap="innerHTML"
+           class="album-action">
+            <svg
+                    stroke="currentColor"
+                    stroke-width="2"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="css-i6dzq1"
+                    viewBox="0 0 24 24"
+            >
+                {% if user in el.likes.all %}
+                <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
+                {% else %}
+                <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
+                {% endif %}
+            </svg>
+            <div id="like-{{ el.id }}">{{ el.likes.count }}</div>
+
+        </a>
+        {% endif %}
+        <a href="{% url 'Article' el.pk %}" class="album-action">
+            <svg stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"
+                 stroke-linejoin="round" class="css-i6dzq1" viewBox="0 0 24 24">
+                <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+            </svg>
+            {% if el.comments.count %}
+            {{ el.comments.count }}
+            {% else %}
+            add comment
+            {% endif %}
+        </a>
+        <a href="#" class="album-action">
+            <svg stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"
+                 stroke-linejoin="round" class="css-i6dzq1" viewBox="0 0 24 24">
+                <path d="M17 1l4 4-4 4"/>
+                <path d="M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4"/>
+                <path d="M21 13v2a4 4 0 01-4 4H3"/>
+            </svg>
+            +
+        </a>
+    </div>
+</div>
+{% endif %}
+
+
+{% endfor %}
+
+
+
+<!--<div hx-get="{% url 'last' %}?page={{ page|add:1 }}"-->
+<!--     hx-trigger="revealed"-->
+<!--     hx-target="this"-->
+<!--     hx-swap="outerHTML">-->
+<!--    Loading...-->
+<!--</div>-->
+<!--</fade-in>-->
+
+
