@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.views import View
-from django.contrib.auth import login, authenticate
-from django.views.generic import CreateView
-
+from django.contrib.auth import login, authenticate, logout
+from django.views.generic import CreateView, UpdateView, DeleteView
+from django.contrib import messages
 from .models import Profile
 from django.urls import reverse_lazy
 from django.contrib.auth.models import User
@@ -18,17 +18,25 @@ def my_profile(request, pk):
     return render(request, 'users/profile.html', context)
 
 
-def profile_edit_view(request):
-    form = ProfileEdit()
-    profile = Profile.objects.all()
-    ph = Profile.objects.all()
-    context = {'profile': profile, 'profuser': ph, 'form': form}
+class profile_edit_view(UpdateView):
+    model = Profile
+    template_name = 'users/profile-edit.html'
+    fields = ['first_name', 'last_name', 'avatar', 'proffecy', 'bg_PIC', 'location']
+    success_url = reverse_lazy('main')
+
+
+# class profile_delete_view(DeleteView):
+#     model = Profile
+#     template_name = 'users/deleteacc.html'
+#     success_url = reverse_lazy('main')
+
+def profile_delete_view(request):
+    user = request.user
 
     if request.method == 'POST':
-        form = ProfileEdit(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
+        logout(request)
+        user.delete()
+        messages.success(request, 'Account deleted, what a pity')
+        return redirect('')
 
-    return render(request, 'users/profile-edit.html', context)
-
-
+    return render(request, 'users/deleteacc.html')
