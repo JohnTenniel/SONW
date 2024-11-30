@@ -14,8 +14,10 @@
                     <article class="art_blog">
 
                     <!--__________Title Page_______-->
-                        <h1 class="main_title">{{ gpost.title }}</h1><h5><a href="{% url 'updateimg' gpost.pk %}">edit</a></h5>
-
+                        <h1 class="main_title">{{ gpost.title }}</h1>
+                        {% if user.is_authenticated and user.id == gpost.autor_id %}
+                        <h5><a href="{% url 'updateimg' gpost.pk %}">edit</a><br><a href="{% url 'deleteimg' gpost.pk %}">delete</a></h5>
+                        {% endif %}
                     <!--__________Author and date Page_______-->
                         <p class="author"> by {{ gpost.autor }}<br/>Published on: {{ gpost.created }}</p>
 

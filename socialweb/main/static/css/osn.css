@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css?family=DM+Sans:400,500,700|Source+Sans+Pro:300,400,600,700&display=swap");
 $bg-color: #151728;
 $border-color: #272a3a;
 $title-font: "DM Sans", sans-serif;
@@ -16,7 +17,7 @@ html {
 }
 
 body {
- font-family: $body-font;
+ font-family: "Source Sans Pro", sans-serif;
  background-color: #373e57;
  color: #ccc8db;
 }
@@ -31,46 +32,46 @@ body {
 }
 
 .left-side {
- width: 260px;
- border-right: 1px solid $border-color;
- display: flex;
- flex-direction: column;
- transition: 0.3s;
- background-color: #151728;
- overflow: auto;
- flex-shrink: 0;
- @media screen and (max-width: 930px) {
-  &.active {
-   z-index: 4;
-   & > *:not(.logo) {
-    opacity: 1;
-    transition: 0.3s 0.2s;
+  width: 260px;
+  border-right: 1px solid #272a3a;
+  display: flex;
+  flex-direction: column;
+  transition: 0.3s;
+  background-color: #151728;
+  overflow: auto;
+  flex-shrink: 0;
+  @media screen and (max-width: 930px) {
+   &.active {
+    z-index: 4;
+    & > *:not(.logo) {
+     opacity: 1;
+     transition: 0.3s 0.2s;
+    }
+    .left-side-button svg:first-child {
+     opacity: 0;
+    }
+    .left-side-button svg:last-child {
+     transform: translate(-50%, -50%);
+     opacity: 1;
+    }
    }
-   .left-side-button svg:first-child {
-    opacity: 0;
-   }
-   .left-side-button svg:last-child {
-    transform: translate(-50%, -50%);
-    opacity: 1;
-   }
-  }
-  &:not(.active) {
-   width: 56px;
-   overflow: hidden;
-   & > *:not(.logo):not(.left-side-button) {
-    opacity: 0;
-   }
-   .logo {
-    writing-mode: vertical-lr;
-    transform: rotate(180deg);
-    transform-origin: bottom;
-    display: flex;
-    align-items: center;
-    margin-top: -10px;
+   &:not(.active) {
+    width: 56px;
+    overflow: hidden;
+    & > *:not(.logo):not(.left-side-button) {
+     opacity: 0;
+    }
+    .logo {
+     writing-mode: vertical-lr;
+     transform: rotate(180deg);
+     transform-origin: bottom;
+     display: flex;
+     align-items: center;
+     margin-top: -10px;
+    }
    }
   }
  }
-}
 
 .right-side {
  width: 280px;
@@ -103,7 +104,7 @@ body {
 }
 
 .logo {
- font-family: $title-font;
+ font-family: "DM Sans", sans-serif;
  font-size: 15px;
  color: #fff;
  font-weight: 600;
@@ -122,8 +123,8 @@ body {
 }
 
 .side-title {
- font-family: $title-font;
- color: $side-title;
+ font-family: "DM Sans", sans-serif;
+ color: #5c5e6e;
  font-size: 15px;
  font-weight: 600;
  margin-bottom: 20px;
@@ -167,7 +168,7 @@ body {
  padding: 0 20px;
  height: 52px;
  flex-shrink: 0;
- border-top: 1px solid $border-color;
+ border-top: 1px solid #272a3a;
  position: relative;
  svg {
   width: 16px;
@@ -200,7 +201,7 @@ body {
  transition: 0.3s;
  padding: 0 20px;
  align-items: center;
- background-color: $border-color;
+ background-color: #272a3a;
  width: 100%;
  height: 100%;
 }
@@ -230,7 +231,7 @@ body {
   background-size: 16px;
   background-position: 25px 50%;
   color: #fff;
-  font-family: $body-font;
+  font-family: "Source Sans Pro", sans-serif;
   font-weight: 600;
   &::placeholder {
    color: #5c5d71;
@@ -292,7 +293,7 @@ body {
 
 .profile-menu-link {
  padding: 20px 16px;
- color: $side-title;
+ color: #5c5e6e;
  transition: 0.3s;
  cursor: pointer;
 
@@ -327,7 +328,7 @@ body {
  font-size: 22px;
  color: #fff;
  font-weight: 600;
- font-family: $title-font;
+ font-family: "DM Sans", sans-serif;
 }
 
 .timeline {
@@ -365,8 +366,8 @@ body {
  padding: 20px;
 
  .intro-title {
-  font-family: $title-font;
-  color: $side-title;
+  font-family: "DM Sans", sans-serif;
+  color: #5c5e6e;
   font-weight: 600;
   font-size: 18px;
   display: flex;
@@ -374,8 +375,8 @@ body {
   margin-bottom: 20px;
  }
  &-menu {
-  background-color: $button;
-  box-shadow: -8px 0 0 0 $button, 8px 0 0 0 $button;
+  background-color: #8f98a9;
+  box-shadow: -8px 0 0 0 #8f98a9, 8px 0 0 0 #8f98a9;
   width: 5px;
   height: 5px;
   border: 0;
@@ -436,7 +437,7 @@ body {
  background-color: #1687fa;
  padding: 7px 20px;
  font-weight: 600;
- font-family: $title-font;
+ font-family: "DM Sans", sans-serif;
  color: #fff;
  text-align: center;
  border-radius: 4px 4px 0 0;
@@ -448,7 +449,7 @@ body {
  color: #fff;
  font-size: 22px;
  font-weight: 600;
- font-family: $title-font;
+ font-family: "DM Sans", sans-serif;
  background-color: rgba(0, 0, 0, 0.4);
  padding: 6px 0;
  text-align: center;
@@ -457,14 +458,14 @@ body {
 .event-title {
  color: #c3c5d5;
  margin-bottom: 5px;
- font-family: $title-font;
+ font-family: "DM Sans", sans-serif;
  font-weight: 600;
  padding: 0 14px;
 }
 
 .event-subtitle {
- color: $side-title;
- font-family: $title-font;
+ color: #5c5e6e;
+ font-family: "DM Sans", sans-serif;
  font-size: 13px;
  font-weight: 500;
  padding: 0 14px;
@@ -496,7 +497,7 @@ body {
 
 .username {
  font-size: 15px;
- font-family: $title-font;
+ font-family: "DM Sans", sans-serif;
 }
 
 .status-menu {
@@ -508,7 +509,7 @@ body {
   color: #ccc8db;
   padding: 10px 14px;
   line-height: 0.7;
-  font-family: $title-font;
+  font-family: "DM Sans", sans-serif;
   font-weight: 500;
   border-radius: 20px;
 .status-menu.active,
@@ -540,7 +541,7 @@ body {
  padding: 0 20px;
  display: flex;
  align-items: center;
- border-bottom: 1px solid $border-color;
+ border-bottom: 1px solid #151728;
  padding-bottom: 20px;
  flex-wrap: wrap;
 }
@@ -730,14 +731,14 @@ body {
 }
 
 .stories {
- border-bottom: 1px solid $border-color;
+ border-bottom: 1px solid #272a3a;
 }
 .stories .user-img {
  border: 2px solid #e2b96c;
 }
 
 .stories .album-date {
- font-family: $body-font;
+ font-family: "Source Sans Pro", sans-serif;
 }
 
 .user-status {
@@ -769,7 +770,7 @@ body {
  padding-right: 10px;
  display: flex;
  align-items: center;
- border-top: 1px solid $border-color;
+ border-top: 1px solid #272a3a;
  position: sticky;
  bottom: 0;
  margin-top: auto;
@@ -811,36 +812,36 @@ body {
 }
 
 .right-side-button {
- position: absolute;
- right: 0;
- top: 0;
- height: 100%;
- border: 0;
- width: 52px;
- background-color: #1e2031;
- border-left: 1px solid $border-color;
- color: #fff;
- display: none;
- cursor: pointer;
-
-.right-side-button:before {
-  content: "";
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
   position: absolute;
-  background-color: #1b86f8;
-  border: 2px solid #1e2031;
-  top: 13px;
-  right: 12px;
+  right: 0;
+  top: 0;
+  height: 100%;
+  border: 0;
+  width: 52px;
+  background-color: #1e2031;
+  border-left: 1px solid #272a3a;
+  color: #fff;
+  display: none;
+  cursor: pointer;
+ 
+  &:before {
+   content: "";
+   width: 10px;
+   height: 10px;
+   border-radius: 50%;
+   position: absolute;
+   background-color: #1b86f8;
+   border: 2px solid #1e2031;
+   top: 13px;
+   right: 12px;
+  }
+  svg {
+   width: 22px;
+  }
+  @media screen and (max-width: 1210px) {
+   display: block;
+  }
  }
- svg {
-  width: 22px;
- }
- @media screen and (max-width: 1210px) {
-  display: block;
- }
-}
 
 .left-side-button {
  display: none;
@@ -852,12 +853,12 @@ body {
   position: relative;
   cursor: pointer;
   height: 60px;
-  background-color: rgba($border-color, 0.5);
+  background-color: rgba(#272a3a, 0.5);
   border: 0;
   padding: 0;
   line-height: 0;
   color: #fff;
-  border-bottom: 1px solid $border-color;
+  border-bottom: 1px solid #272a3a;
   svg {
    transition: 0.2s;
    width: 24px;

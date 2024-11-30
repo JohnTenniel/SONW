@@ -1,0 +1,112 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="main">
+    <div class="main-container">
+        <div class="timeline">
+            <div class="timeline-left">
+                <div class="event box">
+                    <div class="intro-title">
+                        <h1>Your friends</h1>
+                    </div>
+                    <hr>
+                    <div class="event-wrapper">
+                        {% for obj in object_list %}
+                        {% if request.user in obj.friends.all %}
+                        <div>{{obj.first_name}} {{obj.last_name}} @{{obj.user}}
+                            <hr">
+                            <img
+                                    src="{{obj.avatar.url}}"
+                                    class="event-img"
+                                    style="width: 100px; height: 100px;"
+                            />
+                            <button type="button" value="Перейти" class="btn btn-outline-info"
+                                    onclick="window.location='{% url 'profile' obj.pk %}'">See Profile
+                            </button>
+                        </div>
+                        <br>
+                        <form action="{% url 'remove-friend' obj.pk %}" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="'profile_pk" value="{{obj.pk}}">
+                            <button type="submit" class="btn btn-outline-danger">remove from friends</button>
+                        </form>
+                        <hr>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="timeline-right">
+                <div class="album box">
+                    <h1>All Profiles</h1>
+                    <hr>
+                    {% if is_empty %}
+                    <h1>No profiles to interact with</h1>
+                    {% endif %}
+                    {% for obj in object_list %}
+                    <div>
+                        <div>
+                            <div>
+                                {% if obj.user not in rel_receiver and obj.user not in rel_sender %}
+                                <div class="album-photos">
+                                    <img style="width: 200px; height: 200px;" src="{{obj.avatar.url}}" alt=""><br>
+                                    <div class="album-right">
+                                        {{obj.first_name}} {{obj.last_name}} @{{obj.user}}<br>
+                                        <hr>
+                                        <div class="album-photo">
+                                        <button type="button" value="Перейти" class="btn btn-outline-info"
+                                                onclick="window.location='{% url 'profile' obj.pk %}'">See Profile
+                                        </button>
+                                            </div>
+                                            <div class="album-photo">
+                                        <form action="{% url 'send-invate' obj.pk%}" method="POST">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="'profile_pk" value="{{obj.pk}}">
+                                            <button type="submit" class="btn btn-outline-success">add to friends
+                                            </button>
+                                        </form>
+                                                </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="album box">
+                    <h1>Waiting for confirmation</h1>
+                    <hr>
+                    {% if is_empty %}
+                    <h1>No profiles to interact with</h1>
+                    {% endif %}
+                    {% for obj in object_list %}
+                    {% if obj.user in rel_receiver and request.user not in obj.friends.all %}
+                    <div class="album-photos">
+                        <img style="width: 200px; height: 200px;" src="{{obj.avatar.url}}" alt="">
+                        <div class="album-right">
+                            <div class="album-photo">
+                                {{obj.first_name}} {{obj.last_name}} @{{obj.user}}
+                                <hr>
+                            </div>
+                            <div class="album-photo">
+                                <button type="button" value="Перейти" class="btn btn-outline-info"
+                                                onclick="window.location='{% url 'profile' obj.pk %}'">See Profile
+                                        </button>
+                            </div>
+                            <div class="album-photo">
+                                <button type="submit" class="btn btn-outline-secondary">waiting to approval</button>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

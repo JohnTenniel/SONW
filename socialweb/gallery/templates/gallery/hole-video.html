@@ -12,7 +12,10 @@
             <div class="timeline-right">
                 <div class="profile">
                     <article class="art_blog">
-                        <h1 class="main_title">{{ gpost.title }}</h1><h5><a href="{% url 'updatevg' gpost.pk %}">edit</a></h5>
+                        <h1 class="main_title">{{ gpost.title }}</h1>
+                         {% if user.is_authenticated and user.id == gpost.autor_id %}
+                        <h5><a href="{% url 'updatevg' gpost.pk %}">edit</a><br><a href="{% url 'deletevg' gpost.pk %}">delete</a></h5>
+                        {% endif %}
                         <p class="author"> by {{ gpost.autor }}<br/>Published on: {{ gpost.created }}</p>
                         <video
                                     src="{{ gpost.video.url }}"

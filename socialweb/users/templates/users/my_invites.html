@@ -1,0 +1,50 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="main">
+    <div class="main-container">
+        <div class="timeline">
+            <div class="timeline-right">
+                <div class="album box">
+                    <h1>My Invites</h1>
+                    {% if is_empty %}
+                    <h1>No invitation here...</h1>
+                    {% endif %}
+
+                    {% for obj in qs %}
+                    <div class="album-photos">
+                        <img style="width: 100px; height: 100px;" src="{{obj.avatar.url}}" alt="">
+                        <div class="album-right">
+                            {{obj.first_name}} {{obj.last_name}} @{{obj.user}}<br>
+                            <hr>
+                            <div class="album-photo">
+                                <button type="button" value="Перейти" class="btn btn-outline-info"
+                                        onclick="window.location='{% url 'profile' obj.pk %}'">See Profile
+                                </button>
+                            </div>
+                            <div class="album-photo">
+                                <form action="{% url 'accept-invite' obj.pk %}" method="POST">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="'profile_pk" value="{{obj.pk}}">
+                                    <button type="submit" class="btn btn-outline-success">Accept
+                                    </button>
+                                </form>
+                            </div>
+                            <div class="album-photo">
+                                <form action="{% url 'reject-invite' obj.pk %}" method="POST">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="'profile_pk" value="{{obj.pk}}">
+                                    <button type="submit" class="btn btn-outline-danger">Reject</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

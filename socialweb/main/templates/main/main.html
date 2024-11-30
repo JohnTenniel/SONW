@@ -83,7 +83,7 @@
                                      {% endfor %}"
                              class="status-img"/>
                         <div class="album-detail">
-                            <div class="album-title"><strong>{{ el.autor }}</strong> create new
+                            <div class="album-title"><strong><a href="{% url 'profile' el.autor.pk %}">{{ el.autor }}</a></strong> create new
                                 <span><a href="{% url 'Article' el.pk %}">{{ el.title }}</a></span></div>
                             <div class="album-date">{{ el.created }}</div>
                         </div>
@@ -148,7 +148,7 @@
                                      {% endfor %}"
                              class="status-img"/>
                         <div class="album-detail">
-                            <div class="album-title"><strong>{{ el.autor }}</strong> create new
+                            <div class="album-title"><strong><a href="{% url 'profile' el.autor.pk %}">{{ el.autor }}</a></strong> create new
                                 <span><a href="{% url 'Article' el.pk %}">{{ el.title }}</a></span></div>
                             <div class="album-date">{{ el.created }}</div>
                         </div>

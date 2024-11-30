@@ -13,7 +13,12 @@
             <div class="timeline-right">
                 <div class="profile">
                     <article class="art_blog">
-                        <h1 class="main_title">{{ blogpost.title }}</h1><h5><a href="{% url 'updatepost' blogpost.pk %}">edit</a></h5>
+                        <h1 class="main_title">{{ blogpost.title }}</h1>
+                        {% if user.is_authenticated and user.id == blogpost.autor_id %}
+                        <h5><a href="{% url 'updatepost' blogpost.pk %}">edit</a><br><a href="{% url 'deletepost' blogpost.pk %}">delete</a></h5>
+                        {% else %}
+                        <h5></h5>
+                        {% endif %}
                         <p class="author"> by {{ blogpost.autor }}<br/>Published on: {{ blogpost.created }}</p>
                         {% if blogpost.photo %}
                         <img src="{{ blogpost.photo.url }}" alt="здесь было изображение"

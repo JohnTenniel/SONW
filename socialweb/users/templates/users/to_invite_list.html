@@ -1,0 +1,23 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="main">
+    <div class="main-container">
+        <div class="timeline">
+            <div class="timeline-right">
+                <div class="album box">
+                    <h1>Invite friends</h1>
+                    <ul>
+                        {% for item in qs %}
+                        <li>
+                            {{ item }}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
