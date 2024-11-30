@@ -22,13 +22,6 @@
                         alt=""
                         class="profile-cover"
                 />
-                <div class="profile-menu">
-                    <a class="profile-menu-link active">Timeline</a>
-                    <a class="profile-menu-link">About</a>
-                    <a class="profile-menu-link">Friends</a>
-                    <a class="profile-menu-link">Photos</a>
-                    <a class="profile-menu-link">More</a>
-                </div>
             </div>
             <div class="timeline">
                 <div class="timeline-left">
@@ -52,22 +45,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="event box">
-                        <div class="event-wrapper">
-                            <img
-                                    src="https://images.unsplash.com/"
-                                    class="event-img"
-                            />
-                            <div class="event-date">
-                                <div class="event-month">Jan</div>
-                                <div class="event-day">01</div>
-                            </div>
-                            <div class="event-title">Winter Wonderland</div>
-                            <div class="event-subtitle">
-                                01st Jan, 2019 07:00AM
-                            </div>
-                        </div>
-                    </div>
                     <!--friends box-->
                     <div class="pages box">
 
@@ -75,21 +52,20 @@
                             Your friends
                             Count: {{ profile.get_friends_no }}
                         </div>
-                        {% for friends in profile.get_friends %}
+                        {% for friends in profile.friends.all %}
+
                         <div class="user">
 
-<!--                                                        <img-->
-<!--                                                                src="{%for pr in profuser %}{% if pr.user_id == user.id %}{{ pr.avatar.url }}{% endif %}{% endfor %}"-->
-<!--                                                                alt=""-->
-<!--                                                                class="user-img"-->
-<!--                                                        />-->
                             <img
-                                    src=""
+                                    src="{%for pr in profuser %}{% if pr.user_id == friends.id %}{{ pr.avatar.url }}{% endif %}{% endfor %}"
                                     alt=""
                                     class="user-img"
                             />
-                            <div class="username">{{ friends }}</div>
+                            {%for pr in profuser %}{% if pr.user_id == friends.id %}
+                            <div class="username">{{ pr.first_name }} {{ pr.last_name }}</div>
+                            {% endif %}{% endfor %}
                         </div>
+
 
                         {% endfor %}
                     </div>
@@ -98,31 +74,31 @@
                     <!--xz-->
                     <div class="status box">
                         <form action="{% url 'status-edit' user.pk%}" method="POST" enctype="multipart/form-data">
-                        <div class="status-menu">
-                            <a class="status-menu-item active" href="#"
-                            >Status</a
-                            >
-                        </div>
-                        <div class="status-main">
-                            <img
-                                    src="{{ profile.avatar.url }}"
-                                    class="status-img"
-                            />
+                            <div class="status-menu">
+                                <a class="status-menu-item active" href="#"
+                                >Status</a
+                                >
+                            </div>
+                            <div class="status-main">
+                                <img
+                                        src="{{ profile.avatar.url }}"
+                                        class="status-img"
+                                />
                                 {% csrf_token %}
                                 {{ form.as_p }}
-                            <textarea
-                                    type="text"
-                                    name="status"
-                                    maxlength="250"
-                                    id="id_status"
-                                    class="status-textarea"
-                                    placeholder="{{ profile.status }}"
-                            ></textarea>
-                        </div>
+                                <textarea
+                                        type="text"
+                                        name="status"
+                                        maxlength="250"
+                                        id="id_status"
+                                        class="status-textarea"
+                                        placeholder="{{ profile.status }}"
+                                ></textarea>
+                            </div>
                             {% if user.is_authenticated and user.id == profile.user_id %}
-                        <div class="status-actions">
-                            <button class="status-share" type="submit">Share</button>
-                        </div>
+                            <div class="status-actions">
+                                <button class="status-share" type="submit">Share</button>
+                            </div>
                             {% endif %}
                         </form>
                     </div>

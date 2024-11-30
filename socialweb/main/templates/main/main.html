@@ -18,17 +18,13 @@
                                      {% endfor %}"
                              class="status-img"/>
                         <div class="album-detail">
-                            <div class="album-title"><strong><a href="{% url 'profile' el.autor.pk %}">{{ el.autor }}</a></strong> create new <span>post</span></div>
+                            <div class="album-title"><strong><a href="{% url 'profile' el.autor.pk %}">{{ el.autor }}</a></strong> create new
+                                <span><a href="{% url 'hole-image' el.pk %}">{{ el.title }}</a></span></div>
                             <div class="album-date">{{ el.created }}</div>
                         </div>
                         <button class="intro-menu"></button>
                     </div>
                     <div class="album-content">
-                        {% if el.description %}
-                        <a href="{% url 'hole-image' el.pk %}">{{ el.title }}</a>
-                        {% else %}
-                        {{ el.title }}
-                        {% endif %}
                         <div class="album-photos">
                             <img
                                     src="{{el.image.url}}"
@@ -36,6 +32,7 @@
                                     class="album-photo"
                             />
                         </div>
+                        <hr>
                     <h4>{{el.description}}</h4>
                     </div>
                     <div class="album-actions">
@@ -74,15 +71,6 @@
                                 add comment
                                 {% endif %}
                         </a>
-                        <a href="#" class="album-action">
-                            <svg stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"
-                                 stroke-linejoin="round" class="css-i6dzq1" viewBox="0 0 24 24">
-                                <path d="M17 1l4 4-4 4"/>
-                                <path d="M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4"/>
-                                <path d="M21 13v2a4 4 0 01-4 4H3"/>
-                            </svg>
-                            +
-                        </a>
                     </div>
                 </div>
                 {% elif el.video %}
@@ -95,17 +83,13 @@
                                      {% endfor %}"
                              class="status-img"/>
                         <div class="album-detail">
-                            <div class="album-title"><strong>{{ el.autor }}</strong> create new <span>post</span></div>
+                            <div class="album-title"><strong>{{ el.autor }}</strong> create new
+                                <span><a href="{% url 'Article' el.pk %}">{{ el.title }}</a></span></div>
                             <div class="album-date">{{ el.created }}</div>
                         </div>
                         <button class="intro-menu"></button>
                     </div>
                     <div class="album-content">
-                        {% if el.content %}
-                        <a href="{% url 'Article' el.pk %}">{{ el.title }}</a>
-                        {% else %}
-                        {{ el.title }}
-                        {% endif %}
                         <div class="album-photos">
                             <video
                                     src="{{ el.video.url }}"
@@ -113,6 +97,7 @@
                                     controls
                             ></video>
                         </div>
+                        <hr>
                     <h4>{{el.description}}</h4>
                     </div>
                     <div class="album-actions">
@@ -151,15 +136,6 @@
                                 add comment
                                 {% endif %}
                         </a>
-                        <a href="#" class="album-action">
-                            <svg stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"
-                                 stroke-linejoin="round" class="css-i6dzq1" viewBox="0 0 24 24">
-                                <path d="M17 1l4 4-4 4"/>
-                                <path d="M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4"/>
-                                <path d="M21 13v2a4 4 0 01-4 4H3"/>
-                            </svg>
-                            +
-                        </a>
                     </div>
                 </div>
                 {% else %}
@@ -172,17 +148,13 @@
                                      {% endfor %}"
                              class="status-img"/>
                         <div class="album-detail">
-                            <div class="album-title"><strong>{{ el.autor }}</strong> create new <span>post</span></div>
+                            <div class="album-title"><strong>{{ el.autor }}</strong> create new
+                                <span><a href="{% url 'Article' el.pk %}">{{ el.title }}</a></span></div>
                             <div class="album-date">{{ el.created }}</div>
                         </div>
                         <button class="intro-menu"></button>
                     </div>
                     <div class="album-content">
-                        {% if el.content %}
-                        <a href="{% url 'Article' el.pk %}">{{ el.title }}</a>
-                        {% else %}
-                        {{ el.title }}
-                        {% endif %}
                         <div class="album-photos">
                             {% if el.photo %}
                             <img src="{{el.photo.url}}" alt="" class="album-photo"/>
@@ -191,6 +163,7 @@
                                  {% endif %}
 
                         </div>
+                        <hr>
                         {% if el.short_content %}
                         <h4>{{el.short_content}} ...</h4>
                         {% else %}
@@ -233,15 +206,6 @@
                                 {% else %}
                                 add comment
                                 {% endif %}
-                        </a>
-                        <a href="#" class="album-action">
-                            <svg stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"
-                                 stroke-linejoin="round" class="css-i6dzq1" viewBox="0 0 24 24">
-                                <path d="M17 1l4 4-4 4"/>
-                                <path d="M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4"/>
-                                <path d="M21 13v2a4 4 0 01-4 4H3"/>
-                            </svg>
-                            +
                         </a>
                     </div>
                 </div>

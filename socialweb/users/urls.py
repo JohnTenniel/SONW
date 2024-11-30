@@ -11,10 +11,13 @@ from .views import (
     ProfileListView,
     send_invatation,
     remove_from_friends,
+    accept_invatation,
+    reject_invatation,
 )
 
 urlpatterns = [
     path('profile/<int:pk>', my_profile, name='profile'),
+
 
     path('profile/edit/<int:pk>', profile_edit_view.as_view(), name='profile-edit'),
     path('status/edit/<int:pk>', status_edit_view.as_view(), name='status-edit'),
@@ -25,4 +28,6 @@ urlpatterns = [
     path('to_invite_list/', invite_profiles_list_view, name='to_invite_list'),
     path('send_invate/<int:pk>', send_invatation, name='send-invate'),
     path('remove_friend/<int:pk>', remove_from_friends, name='remove-friend'),
+    path('accept_invites/accept/<int:pk>', accept_invatation, name='accept-invite'),
+    path('accept_invites/reject/<int:pk>', reject_invatation, name='reject-invite'),
 ]

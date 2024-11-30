@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from django.contrib.auth import login, authenticate, logout
 from django.views.generic import CreateView, UpdateView, DeleteView, ListView
@@ -60,19 +60,35 @@ def invites_received_view(request):
     return render(request, 'users/my_invites.html', context)
 
 
-def accept_invatation(request):
-    pass
+def accept_invatation(request, pk):
+    if request.method == 'POST':
+        user = request.user
+        sender = Profile.objects.get(pk=pk)
+        receiver = Profile.objects.get(user=request.user)
+        rel = get_object_or_404(Relationship, sender=sender, receiver=receiver)
+        if rel.status == 'send':
+            rel.status = 'accepted'
+            rel.save()
+        return redirect(request.META.get('HTTP_REFERER'))
+    return redirect('users/profile')
 
 
-def reject_invatation(request):
-    pass
+def reject_invatation(request, pk):
+    if request.method == 'POST':
+        sender = Profile.objects.get(pk=pk)
+        receiver = Profile.objects.get(user=request.user)
+        rel = get_object_or_404(Relationship, sender=sender, receiver=receiver)
+        rel.delete()
+        return redirect(request.META.get('HTTP_REFERER'))
+    return redirect('users/profile')
 
 
 def profiles_list_view(request):
     user = request.user
     qs = Profile.objects.get_all_profiles(user)
+    ph = Profile.objects.all()
 
-    context = {'qs': qs}
+    context = {'qs': qs, 'profuser': ph}
 
     return render(request, 'users/profile_list.html', context)
 
@@ -142,3 +158,5 @@ def remove_from_friends(request, pk):
         rel.delete()
         return redirect(request.META.get('HTTP_REFERER'))
     return redirect('users/profile')
+
+

@@ -40,8 +40,9 @@
                 <li>
                     <a class="maina" href="#"> <img src="{{ pr.avatar.url}}" alt="" class="account-profile" alt=""/> <span>▼</span></a>
                     <ul class="subnav">
-                        <li><a href="{% url 'profile-edit' pr.pk %}">Настройки</a></li>
-                        <li><a href="#">Приложение</a></li>
+                        <li><a href="{% url 'profile-edit' pr.pk %}">Settings</a></li>
+                        <li><a href="{% url 'my_invites' %}">Invites</a></li>
+                        <li><a href="{% url 'profile_list' %}">Friends</a></li>
                         <li>
                             {% if user.is_authenticated %}
                             <a href="{% url 'password_change' %}">
